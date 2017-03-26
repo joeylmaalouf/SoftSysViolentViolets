@@ -19,10 +19,10 @@ We’re most concerned about translating two-dimensional screen space into three
 #### Annotated Bibliography
 
 - [General introductory reference on OpenGL](http://www.glprogramming.com/red/chapter01.html)
-- - This tutorial describes OpenGL’s capabilities, gives a high-level overview of its rendering pipeline, points to common libraries, and explains double-buffered animation.
+  - This tutorial describes OpenGL’s capabilities, gives a high-level overview of its rendering pipeline, points to common libraries, and explains double-buffered animation.
 
 - [Tutorial for rotation in a plane](http://www.lighthouse3d.com/tutorials/glut-tutorial/mouse-putting-it-all-together/)
-- - This tutorial provides an example of triggering events upon mouse click / mouse motion in OpenGL and describes how to set up ground plane rotation upon mouse drag.
+  - This tutorial provides an example of triggering events upon mouse click / mouse motion in OpenGL and describes how to set up ground plane rotation upon mouse drag.
 
 #### Product Backlog
 
