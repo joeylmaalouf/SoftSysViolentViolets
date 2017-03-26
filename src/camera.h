@@ -26,10 +26,14 @@ class Camera {
 
     // for glRotate
     // (https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glRotate.xml)
-    double rotateX = 0;
-    double rotateY = 0;
-    double rotateZ = 0;
+    double rotationX = 0;
+    double rotationY = 0;
+    double rotationZ = 0;
 
   public:
     void display();
+    void rotateX();
+    void rotateY();
+    void rotateZ();
+    void reset();
 };

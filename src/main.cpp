@@ -13,11 +13,20 @@ void display() {
 }
 
 void handleInput(unsigned char key, int x, int y) {
-  // switch (key) {
-  //   case 'x':
-  //     // do something
-  //     // break
-  // }
+  switch (key) {
+    case 'x':
+      camera->rotateX();
+      break;
+    case 'y':
+      camera->rotateY();
+      break;
+    case 'z':
+      camera->rotateZ();
+      break;
+    case 'r':
+      camera->reset();
+      break;
+  }
 
   glutPostRedisplay();
 }
