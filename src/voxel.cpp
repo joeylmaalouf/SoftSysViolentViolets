@@ -3,14 +3,18 @@
 class Voxel {
   private:
     tuple3i pos;
-    tuple3i color;
+    tuple3i col;
 
     Voxel (tuple3i p, tuple3i c) {
       pos = p;
-      color = c;
+      col = c;
     }
 
+    tuple3i getPosition () {
+      return pos;
+    };
+
     tuple3i getColor () {
-      return color;
+      return col;
     };
 };
