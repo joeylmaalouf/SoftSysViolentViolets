@@ -13,9 +13,9 @@ class Voxel {
 
     tuple3i getPosition () {
       return pos;
-    };
+    }
 
     tuple3i getColor () {
       return col;
-    };
+    }
 };
