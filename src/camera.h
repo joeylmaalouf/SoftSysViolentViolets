@@ -1,5 +1,3 @@
-#include <GL/glut.h>
-
 class Camera {
   private:
     // for gluPerspective:
@@ -12,8 +10,8 @@ class Camera {
     // for gluLookAt
     // (https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/gluLookAt.xml)
     // ...position of eye point
-    double eyeX = 5;
-    double eyeY = 5;
+    double eyeX = 3;
+    double eyeY = 2;
     double eyeZ = 5;
 
     // ...position of reference point
@@ -23,8 +21,8 @@ class Camera {
 
     // ...direction of up vector
     double upX = 0;
-    double upY = 0;
-    double upZ = 1;
+    double upY = 1;
+    double upZ = 0;
 
     // for glRotate
     // (https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glRotate.xml)
@@ -33,7 +31,5 @@ class Camera {
     double rotateZ = 0;
 
   public:
-    Camera();
-
     void display();
 };
