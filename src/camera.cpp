@@ -19,13 +19,31 @@ void Camera::display() {
   gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ);
 
   // Set the camera rotation
-  glRotated(rotateX, 1.0, 0.0, 0.0);
-  glRotated(rotateY, 0.0, 1.0, 0.0);
-  glRotated(rotateZ, 0.0, 0.0, 1.0);
+  glRotated(rotationX, 1.0, 0.0, 0.0);
+  glRotated(rotationY, 0.0, 1.0, 0.0);
+  glRotated(rotationZ, 0.0, 0.0, 1.0);
 
   // This is where drawing will happen
   glutSolidTeapot(1);
 
   // Animation uses double-buffering
   glutSwapBuffers();
+}
+
+void Camera::rotateX() {
+    rotationX += 10;
+}
+
+void Camera::rotateY() {
+    rotationY += 10;
+}
+
+void Camera::rotateZ() {
+    rotationZ += 10;
+}
+
+void Camera::reset() {
+    rotationX = 0;
+    rotationY = 0;
+    rotationZ = 0;
 }
