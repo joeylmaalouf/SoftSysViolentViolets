@@ -1,5 +1,5 @@
 #include "util.h"
-#include "cursor.cpp"
+#include "voxel.cpp"
 
 class Cursor {
   private:
