@@ -8,26 +8,24 @@ class Cursor {
     int shape;
 
   public:
-    void setShape (int flag) {
-      shape = flag;
-    }
-
-    tuple3i getPosition () {
-      return position;
+    int getShape () {
+      return shape;
     }
 
     tuple3i getColor () {
       return color;
     }
 
-    int getShape () {
-      return shape;
+    tuple3i getPosition () {
+      return position;
+    }
+
+    void setShape (int flag) {
+      shape = flag;
     }
 
     void setColor (tuple3i newColor) {
-      get<0>(color) = get<0>(newColor);
-      get<1>(color) = get<1>(newColor);
-      get<2>(color) = get<2>(newColor);
+      color = newColor;
     }
 
     void move (tuple3i delta) {
