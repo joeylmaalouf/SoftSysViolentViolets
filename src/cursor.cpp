@@ -3,9 +3,9 @@
 
 class Cursor {
   private:
-    tuple3i position;
-    tuple3i color;
     int shape;
+    tuple3i color;
+    tuple3i position;
 
   public:
     int getShape () {
