@@ -2,7 +2,7 @@
 
 #include "camera.h"
 
-Camera camera = new Camera();
+Camera *camera = new Camera();
 
 void update() {
   glutPostRedisplay();
@@ -22,7 +22,7 @@ void handleInput(unsigned char key, int x, int y) {
   glutPostRedisplay();
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char *argv[]) {
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
   glutInitWindowSize(640, 480);

@@ -1,8 +1,6 @@
-void Camera::Camera() {
-  int w = glutGet(GLUT_WINDOW_WIDTH);
-  int h = glutGet(GLUT_WINDOW_HEIGHT);
-  Camera::aspect = w / h;
-}
+#include <GL/glut.h>
+
+#include "camera.h"
 
 void Camera::display() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -10,6 +8,9 @@ void Camera::display() {
   // Set up the projection matrix
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
+  int w = glutGet(GLUT_WINDOW_WIDTH);
+  int h = glutGet(GLUT_WINDOW_HEIGHT);
+  aspect = w / h;
   gluPerspective(fovy, aspect, zNear, zFar);
 
   // Set up the model matrix
@@ -18,9 +19,12 @@ void Camera::display() {
   gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ);
 
   // Set the camera rotation
-  gluRotated(rotateX, 1.0, 0.0, 0.0);
-  gluRotated(rotateY, 0.0, 1.0, 0.0);
-  gluRotated(rotateZ, 0.0, 0.0, 1.0);
+  glRotated(rotateX, 1.0, 0.0, 0.0);
+  glRotated(rotateY, 0.0, 1.0, 0.0);
+  glRotated(rotateZ, 0.0, 0.0, 1.0);
+
+  // This is where drawing will happen
+  glutSolidTeapot(1);
 
   // Animation uses double-buffering
   glutSwapBuffers();
