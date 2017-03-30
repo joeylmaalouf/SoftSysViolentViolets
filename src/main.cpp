@@ -7,15 +7,15 @@ GLfloat mat_specular[] = {1.0, 1.0, 1.0, 1.0};
 GLfloat mat_shininess[] = {50.0};
 GLfloat light_position[] = {1.0, 1.0, 1.0, 0.0};
 
-void update() {
+void update () {
   glutPostRedisplay();
 }
 
-void display() {
+void display () {
   camera->display();
 }
 
-void handleInput(unsigned char key, int x, int y) {
+void handleInput (unsigned char key, int x, int y) {
   switch (key) {
     case 'x':
       camera->rotateX();
@@ -34,7 +34,7 @@ void handleInput(unsigned char key, int x, int y) {
 }
 
 
-void handleSpecialInput(int key, int x, int y) {
+void handleSpecialInput (int key, int x, int y) {
   switch (key) {
     case GLUT_KEY_UP:
       cout << "UP" << endl;
@@ -52,7 +52,7 @@ void handleSpecialInput(int key, int x, int y) {
   glutPostRedisplay();
 }
 
-int main(int argc, char *argv[]) {
+int main (int argc, char *argv[]) {
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
   glutInitWindowSize(640, 480);

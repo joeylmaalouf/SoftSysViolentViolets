@@ -1,3 +1,6 @@
+#ifndef CURSOR_H
+#define CURSOR_H
+
 #include "util.h"
 #include "voxel.h"
 
@@ -17,3 +20,5 @@ class Cursor {
     void place (Voxel *voxels);
     void erase (tuple3i *positions);
 };
+
+#endif /* CURSOR_H */

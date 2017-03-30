@@ -1,3 +1,6 @@
+#ifndef VOXEL_H
+#define VOXEL_H
+
 #include "util.h"
 
 class Voxel {
@@ -10,3 +13,5 @@ class Voxel {
     tuple3i getPosition ();
     tuple3i getColor ();
 };
+
+#endif /* VOXEL_H */

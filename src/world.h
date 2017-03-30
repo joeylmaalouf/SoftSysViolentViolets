@@ -1,3 +1,6 @@
+#ifndef WORLD_H
+#define WORLD_H
+
 #include <map>
 #include "cursor.h"
 #include "util.h"
@@ -17,3 +20,5 @@ class World {
     void handleInput (int event);
     void setBackgroundColor (tuple3i color);
 };
+
+#endif /* WORLD_H */
