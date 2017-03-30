@@ -1,21 +1,14 @@
-#include "util.h"
+#include "voxel.h"
 
-class Voxel {
-  private:
-    tuple3i pos;
-    tuple3i col;
+Voxel::Voxel (tuple3i p, tuple3i c) {
+  pos = p;
+  col = c;
+}
 
-  public:
-    Voxel (tuple3i p, tuple3i c) {
-      pos = p;
-      col = c;
-    }
+tuple3i Voxel::getPosition () {
+  return pos;
+}
 
-    tuple3i getPosition () {
-      return pos;
-    }
-
-    tuple3i getColor () {
-      return col;
-    }
-};
+tuple3i Voxel::getColor () {
+  return col;
+}

@@ -1,3 +1,6 @@
+#ifndef CAMERA_H
+#define CAMERA_H
+
 class Camera {
   private:
     // for gluPerspective:
@@ -31,9 +34,11 @@ class Camera {
     double rotationZ = 0;
 
   public:
-    void display();
-    void rotateX();
-    void rotateY();
-    void rotateZ();
-    void reset();
+    void display ();
+    void rotateX ();
+    void rotateY ();
+    void rotateZ ();
+    void reset ();
 };
+
+#endif /* CAMERA_H */
