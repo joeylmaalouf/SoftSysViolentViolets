@@ -1,8 +1,7 @@
 #include <GL/glut.h>
-
 #include "camera.h"
 
-void Camera::display() {
+void Camera::display () {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   // Set up the projection matrix
@@ -30,19 +29,19 @@ void Camera::display() {
   glutSwapBuffers();
 }
 
-void Camera::rotateX() {
+void Camera::rotateX () {
     rotationX += 10;
 }
 
-void Camera::rotateY() {
+void Camera::rotateY () {
     rotationY += 10;
 }
 
-void Camera::rotateZ() {
+void Camera::rotateZ () {
     rotationZ += 10;
 }
 
-void Camera::reset() {
+void Camera::reset () {
     rotationX = 0;
     rotationY = 0;
     rotationZ = 0;

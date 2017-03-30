@@ -1,5 +1,5 @@
 #include <GL/glut.h>
-
+#include <iostream>
 #include "camera.h"
 
 Camera *camera = new Camera();
@@ -30,7 +30,25 @@ void handleInput(unsigned char key, int x, int y) {
       camera->reset();
       break;
   }
+  glutPostRedisplay();
+}
 
+
+void handleSpecialInput(int key, int x, int y) {
+  switch (key) {
+    case GLUT_KEY_UP:
+      cout << "UP" << endl;
+      break;
+    case GLUT_KEY_DOWN:
+      cout << "DOWN" << endl;
+      break;
+    case GLUT_KEY_LEFT:
+      cout << "LEFT" << endl;
+      break;
+    case GLUT_KEY_RIGHT:
+      cout << "RIGHT" << endl;
+      break;
+  }
   glutPostRedisplay();
 }
 
@@ -44,6 +62,7 @@ int main(int argc, char *argv[]) {
   glutIdleFunc(update);
   glutDisplayFunc(display);
   glutKeyboardFunc(handleInput); // https://www.opengl.org/resources/libraries/glut/spec3/node49.html
+  glutSpecialFunc(handleSpecialInput);
 
   // Set up material
   glShadeModel(GL_SMOOTH);
