@@ -1,6 +1,10 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
+#include "cursor.h"
+
+void drawCube (float x, float y, float z);
+
 class Camera {
   private:
     // for gluPerspective:
@@ -34,7 +38,7 @@ class Camera {
     double rotationZ = 0;
 
   public:
-    void display ();
+    void display (Cursor *cursor);
     void rotateX ();
     void rotateY ();
     void rotateZ ();

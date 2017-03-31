@@ -1,7 +1,49 @@
 #include <GL/glut.h>
 #include "camera.h"
 
-void Camera::display () {
+void drawCube (float x, float y, float z, int draw_flag) {
+  float scale = 0.5f;
+
+  glPushMatrix();
+  glTranslatef(x, y, z);
+  glBegin(draw_flag);
+  glColor4f(1.0, 0.0, 0.0, 0.5);
+
+  glVertex3f(-scale, -scale, -scale);
+  glVertex3f( scale, -scale, -scale);
+  glVertex3f(-scale,  scale, -scale);
+  glVertex3f( scale,  scale, -scale);
+
+  glVertex3f(-scale, -scale, -scale);
+  glVertex3f(-scale, -scale,  scale);
+  glVertex3f( scale, -scale, -scale);
+  glVertex3f( scale, -scale,  scale);
+
+  glVertex3f(-scale, -scale,  scale);
+  glVertex3f( scale, -scale,  scale);
+  glVertex3f(-scale,  scale,  scale);
+  glVertex3f( scale,  scale,  scale);
+
+  glVertex3f(-scale,  scale, -scale);
+  glVertex3f(-scale,  scale,  scale);
+  glVertex3f( scale,  scale, -scale);
+  glVertex3f( scale,  scale,  scale);
+
+  glVertex3f( scale,  scale, -scale);
+  glVertex3f( scale, -scale, -scale);
+  glVertex3f(-scale,  scale, -scale);
+  glVertex3f(-scale, -scale, -scale);
+
+  glVertex3f( scale,  scale,  scale);
+  glVertex3f( scale, -scale,  scale);
+  glVertex3f(-scale,  scale,  scale);
+  glVertex3f(-scale, -scale,  scale);
+
+  glEnd();
+  glPopMatrix();
+}
+
+void Camera::display (Cursor *cursor) {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   // Set up the projection matrix
@@ -23,7 +65,8 @@ void Camera::display () {
   glRotated(rotationZ, 0.0, 0.0, 1.0);
 
   // This is where drawing will happen
-  glutSolidTeapot(1);
+  tuple3i pos = cursor->getPosition();
+  drawCube(get<0>(pos), get<1>(pos), get<2>(pos), GL_LINES);
 
   // Animation uses double-buffering
   glutSwapBuffers();
