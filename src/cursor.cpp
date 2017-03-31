@@ -2,7 +2,7 @@
 
 Cursor::Cursor () {
   shape = 0;
-  color = make_tuple(127, 127, 127);
+  color = make_tuple(127, 0, 0);
   position = make_tuple(0, 0, 0);
 }
 

@@ -3,7 +3,7 @@
 
 #include "cursor.h"
 
-void drawCube (float x, float y, float z);
+void drawCube (tuple3i pos, tuple3i col, int draw_flag);
 
 class Camera {
   private:

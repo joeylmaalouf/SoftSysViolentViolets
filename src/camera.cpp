@@ -1,13 +1,19 @@
 #include <GL/glut.h>
 #include "camera.h"
 
-void drawCube (float x, float y, float z, int draw_flag) {
+void drawCube (tuple3i pos, tuple3i col, int draw_flag) {
   float scale = 0.5f;
+  float x = (float)get<0>(pos);
+  float y = (float)get<1>(pos);
+  float z = (float)get<2>(pos);
+  int r = get<0>(col);
+  int g = get<1>(col);
+  int b = get<2>(col);
 
   glPushMatrix();
   glTranslatef(x, y, z);
   glBegin(draw_flag);
-  glColor4f(1.0, 0.0, 0.0, 0.5);
+  glColor4b(r, g, b, 64);
 
   glVertex3f(-scale, -scale, -scale);
   glVertex3f( scale, -scale, -scale);
@@ -65,8 +71,7 @@ void Camera::display (Cursor *cursor) {
   glRotated(rotationZ, 0.0, 0.0, 1.0);
 
   // This is where drawing will happen
-  tuple3i pos = cursor->getPosition();
-  drawCube(get<0>(pos), get<1>(pos), get<2>(pos), GL_LINES);
+  drawCube(cursor->getPosition(), cursor->getColor(), GL_LINES);
 
   // Animation uses double-buffering
   glutSwapBuffers();
