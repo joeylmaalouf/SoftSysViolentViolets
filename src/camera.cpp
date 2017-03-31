@@ -29,16 +29,40 @@ void Camera::display () {
   glutSwapBuffers();
 }
 
-void Camera::rotateX () {
-    rotationX += 10;
+void Camera::rotateX (int degrees) {
+    rotationX += degrees;
+
+    if (rotationX >= 360) {
+        rotationX -= 360;
+    } else if (rotationX < 0) {
+        rotationX += 360;
+    }
 }
 
-void Camera::rotateY () {
-    rotationY += 10;
+void Camera::rotateY (int degrees) {
+    rotationY += degrees;
+
+    if (rotationY >= 360) {
+        rotationY -= 360;
+    } else if (rotationY < 0) {
+        rotationY += 360;
+    }
 }
 
-void Camera::rotateZ () {
-    rotationZ += 10;
+void Camera::rotateZ (int degrees) {
+    rotationZ += degrees;
+
+    if (rotationZ >= 360) {
+        rotationZ -= 360;
+    } else if (rotationZ < 0) {
+        rotationZ += 360;
+    }
+}
+
+void Camera::zoom (double scalar) {
+    eyeX *= scalar;
+    eyeY *= scalar;
+    eyeZ *= scalar;
 }
 
 void Camera::reset () {

@@ -35,9 +35,10 @@ class Camera {
 
   public:
     void display ();
-    void rotateX ();
-    void rotateY ();
-    void rotateZ ();
+    void rotateX (int degrees);
+    void rotateY (int degrees);
+    void rotateZ (int degrees);
+    void zoom (double scalar);
     void reset ();
 };
 

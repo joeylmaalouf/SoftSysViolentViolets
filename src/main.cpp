@@ -17,14 +17,29 @@ void display () {
 
 void handleInput (unsigned char key, int x, int y) {
   switch (key) {
-    case 'x':
-      camera->rotateX();
+    case 'w':
+      camera->rotateX(10);
       break;
-    case 'y':
-      camera->rotateY();
+    case 's':
+      camera->rotateX(-10);
+      break;
+    case 'a':
+      camera->rotateY(10);
+      break;
+    case 'd':
+      camera->rotateY(-10);
+      break;
+    case 'q':
+      camera->rotateZ(10);
+      break;
+    case 'e':
+      camera->rotateZ(-10);
       break;
     case 'z':
-      camera->rotateZ();
+      camera->zoom(1.1);
+      break;
+    case 'x':
+      camera->zoom(0.9);
       break;
     case 'r':
       camera->reset();
