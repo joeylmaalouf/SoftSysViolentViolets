@@ -20,18 +20,18 @@ void World::handleInput (int event) {
       // cursor.setShape(flag);
       break;
     case 3:
-      Voxel *voxels;
-      cursor.place(voxels);
       int w = (2 * cursor.getShape()) - 1;
+      Voxel *voxels = malloc(w*w*w*sizeof(Voxel));
+      cursor.place(voxels);
       for (int i = 0; i < (w*w*w); i++) {
         Voxel vox = voxels[i];
         grid[vox.getPosition()] = vox;
       }
       break;
     case 4:
-      tuple3i *positions;
-      cursor.erase(positions);
       int w = (2 * cursor.getShape()) - 1;
+      tuple3i *positions = malloc(w*w*w*sizeof(tuple3i));
+      cursor.erase(positions);
       for (int i = 0; i < (w*w*w); i++) {
         grid.erase(positions[i]);
       }
