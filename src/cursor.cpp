@@ -13,7 +13,11 @@ tuple3i Cursor::getPosition () {
 }
 
 void Cursor::setShape (int flag) {
-  shape = flag;
+  if (flag > 0){
+    shape = flag;
+  } else {
+    shape = 1;
+  }
 }
 
 void Cursor::setColor (tuple3i newColor) {
@@ -27,9 +31,31 @@ void Cursor::move (tuple3i delta) {
 }
 
 void Cursor::place (Voxel *voxels) {
-  voxels[0] = Voxel(position, color);
+  tuple3i this_pos;
+  int w = (2*shape) - 1;
+  for (int x = -1*(shape - 1); x < shape; x++) {
+    for (int y = -1*(shape - 1); y < shape; y++) {
+      for (int z = -1*(shape - 1); z < shape; z++) {
+        get<0>(this_pos) = get<0>(position) + x;
+        get<1>(this_pos) = get<1>(position) + y;
+        get<2>(this_pos) = get<2>(position) + z;
+        voxels[z + (w*y) + (w*w*x)] = Voxel(this_pos, color);
+      }
+    }
+  }
 }
 
 void Cursor::erase (tuple3i *positions) {
-  positions[0] = position;
+  tuple3i this_pos;
+  int w = (2*shape) - 1;
+  for (int x = -1*(shape - 1); x < shape; x++) {
+    for (int y = -1*(shape - 1); y < shape; y++) {
+      for (int z = -1*(shape - 1); z < shape; z++) {
+        get<0>(this_pos) = get<0>(position) + x;
+        get<1>(this_pos) = get<1>(position) + y;
+        get<2>(this_pos) = get<2>(position) + z;
+        positions[z + (w*y) + (w*w*x)] = position;
+      }
+    }
+  }
 }

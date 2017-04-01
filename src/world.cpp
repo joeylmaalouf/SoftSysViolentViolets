@@ -22,7 +22,8 @@ void World::handleInput (int event) {
     case 3:
       Voxel *voxels;
       cursor.place(voxels);
-      for (int i = 0; i < 1; i++) {
+      int w = (2 * cursor.getShape()) - 1;
+      for (int i = 0; i < (w*w*w); i++) {
         Voxel vox = voxels[i];
         grid[vox.getPosition()] = vox;
       }
@@ -30,7 +31,8 @@ void World::handleInput (int event) {
     case 4:
       tuple3i *positions;
       cursor.erase(positions);
-      for (int i = 0; i < 1; i++) {
+      int w = (2 * cursor.getShape()) - 1;
+      for (int i = 0; i < (w*w*w); i++) {
         grid.erase(positions[i]);
       }
       break;
