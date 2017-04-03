@@ -1,5 +1,7 @@
 #include <GL/glut.h>
+#include <math.h>
 #include "camera.h"
+#include "util.h"
 
 void drawCube (tuple3i pos, tuple3i col, int draw_flag) {
   float scale = 0.5f;
@@ -77,16 +79,22 @@ void Camera::display (Cursor *cursor) {
   glutSwapBuffers();
 }
 
-void Camera::rotateX () {
-    rotationX += 10;
+void Camera::rotateX (int degrees) {
+    rotationX = fmod(rotationX + degrees, 360);
 }
 
-void Camera::rotateY () {
-    rotationY += 10;
+void Camera::rotateY (int degrees) {
+    rotationY = fmod(rotationY + degrees, 360);
 }
 
-void Camera::rotateZ () {
-    rotationZ += 10;
+void Camera::rotateZ (int degrees) {
+    rotationZ = fmod(rotationZ + degrees, 360);
+}
+
+void Camera::zoom (double scalar) {
+    eyeX *= scalar;
+    eyeY *= scalar;
+    eyeZ *= scalar;
 }
 
 void Camera::reset () {
