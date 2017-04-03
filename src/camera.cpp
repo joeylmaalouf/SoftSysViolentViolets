@@ -1,5 +1,6 @@
 #include <GL/glut.h>
 #include "camera.h"
+#include <math.h>
 
 void Camera::display () {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -30,33 +31,15 @@ void Camera::display () {
 }
 
 void Camera::rotateX (int degrees) {
-    rotationX += degrees;
-
-    if (rotationX >= 360) {
-        rotationX -= 360;
-    } else if (rotationX < 0) {
-        rotationX += 360;
-    }
+    rotationX = fmod(rotationX + degrees, 360);
 }
 
 void Camera::rotateY (int degrees) {
-    rotationY += degrees;
-
-    if (rotationY >= 360) {
-        rotationY -= 360;
-    } else if (rotationY < 0) {
-        rotationY += 360;
-    }
+    rotationY = fmod(rotationY + degrees, 360);
 }
 
 void Camera::rotateZ (int degrees) {
-    rotationZ += degrees;
-
-    if (rotationZ >= 360) {
-        rotationZ -= 360;
-    } else if (rotationZ < 0) {
-        rotationZ += 360;
-    }
+    rotationZ = fmod(rotationZ + degrees, 360);
 }
 
 void Camera::zoom (double scalar) {

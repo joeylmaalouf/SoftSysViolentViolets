@@ -1,3 +1,5 @@
+using namespace std;
+
 #include <GL/glut.h>
 #include <iostream>
 #include "camera.h"
