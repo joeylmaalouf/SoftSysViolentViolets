@@ -1,5 +1,7 @@
 #include <GL/glut.h>
+#include <math.h>
 #include "camera.h"
+#include "util.h"
 
 void Camera::display () {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -29,16 +31,22 @@ void Camera::display () {
   glutSwapBuffers();
 }
 
-void Camera::rotateX () {
-    rotationX += 10;
+void Camera::rotateX (int degrees) {
+    rotationX = fmod(rotationX + degrees, 360);
 }
 
-void Camera::rotateY () {
-    rotationY += 10;
+void Camera::rotateY (int degrees) {
+    rotationY = fmod(rotationY + degrees, 360);
 }
 
-void Camera::rotateZ () {
-    rotationZ += 10;
+void Camera::rotateZ (int degrees) {
+    rotationZ = fmod(rotationZ + degrees, 360);
+}
+
+void Camera::zoom (double scalar) {
+    eyeX *= scalar;
+    eyeY *= scalar;
+    eyeZ *= scalar;
 }
 
 void Camera::reset () {
