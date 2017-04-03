@@ -4,50 +4,24 @@
 #include "util.h"
 
 void drawCube (tuple3i pos, tuple3i col, int draw_flag) {
-  float scale = 0.5f;
   float x = (float)get<0>(pos);
   float y = (float)get<1>(pos);
   float z = (float)get<2>(pos);
   int r = get<0>(col);
   int g = get<1>(col);
   int b = get<2>(col);
+  int size = 1;
 
   glPushMatrix();
   glTranslatef(x, y, z);
-  glBegin(draw_flag);
   glColor4b(r, g, b, 64);
 
-  glVertex3f(-scale, -scale, -scale);
-  glVertex3f( scale, -scale, -scale);
-  glVertex3f(-scale,  scale, -scale);
-  glVertex3f( scale,  scale, -scale);
+  if (draw_flag == GL_LINES) {
+    glutWireCube(size);
+  } else {
+    glutSolidCube(size);
+  }
 
-  glVertex3f(-scale, -scale, -scale);
-  glVertex3f(-scale, -scale,  scale);
-  glVertex3f( scale, -scale, -scale);
-  glVertex3f( scale, -scale,  scale);
-
-  glVertex3f(-scale, -scale,  scale);
-  glVertex3f( scale, -scale,  scale);
-  glVertex3f(-scale,  scale,  scale);
-  glVertex3f( scale,  scale,  scale);
-
-  glVertex3f(-scale,  scale, -scale);
-  glVertex3f(-scale,  scale,  scale);
-  glVertex3f( scale,  scale, -scale);
-  glVertex3f( scale,  scale,  scale);
-
-  glVertex3f( scale,  scale, -scale);
-  glVertex3f( scale, -scale, -scale);
-  glVertex3f(-scale,  scale, -scale);
-  glVertex3f(-scale, -scale, -scale);
-
-  glVertex3f( scale,  scale,  scale);
-  glVertex3f( scale, -scale,  scale);
-  glVertex3f(-scale,  scale,  scale);
-  glVertex3f(-scale, -scale,  scale);
-
-  glEnd();
   glPopMatrix();
 }
 
