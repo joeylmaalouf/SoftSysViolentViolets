@@ -1,5 +1,11 @@
 #include "cursor.h"
 
+Cursor::Cursor () {
+  shape = 1;
+  color = make_tuple(127, 0, 0);
+  position = make_tuple(0, 0, 0);
+}
+
 int Cursor::getShape () {
   return shape;
 }

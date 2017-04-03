@@ -3,8 +3,11 @@ using namespace std;
 #include <GL/glut.h>
 #include <iostream>
 #include "camera.h"
+#include "cursor.h"
+#include "util.h"
 
 Camera *camera = new Camera();
+Cursor *cursor = new Cursor();
 GLfloat mat_specular[] = {1.0, 1.0, 1.0, 1.0};
 GLfloat mat_shininess[] = {50.0};
 GLfloat light_position[] = {1.0, 1.0, 1.0, 0.0};
@@ -14,7 +17,7 @@ void update () {
 }
 
 void display () {
-  camera->display();
+  camera->display(cursor);
 }
 
 void handleInput (unsigned char key, int x, int y) {
@@ -52,20 +55,30 @@ void handleInput (unsigned char key, int x, int y) {
 
 
 void handleSpecialInput (int key, int x, int y) {
+  int dx = 0;
+  int dy = 0;
+  int dz = 0;
   switch (key) {
-    case GLUT_KEY_UP:
-      cout << "UP" << endl;
-      break;
-    case GLUT_KEY_DOWN:
-      cout << "DOWN" << endl;
-      break;
     case GLUT_KEY_LEFT:
-      cout << "LEFT" << endl;
+      dx = -1;
       break;
     case GLUT_KEY_RIGHT:
-      cout << "RIGHT" << endl;
+      dx = 1;
+      break;
+    case GLUT_KEY_DOWN:
+      dy = -1;
+      break;
+    case GLUT_KEY_UP:
+      dy = 1;
+      break;
+    case GLUT_KEY_PAGE_DOWN:
+      dz = -1;
+      break;
+    case GLUT_KEY_PAGE_UP:
+      dz = 1;
       break;
   }
+  cursor->move(make_tuple(dx, dy, dz));
   glutPostRedisplay();
 }
 
@@ -88,9 +101,13 @@ int main (int argc, char *argv[]) {
 
   // Set up lighting
   glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-  glEnable(GL_LIGHTING);
+  // glEnable(GL_LIGHTING);
   glEnable(GL_LIGHT0);
   glEnable(GL_DEPTH_TEST);
+
+  // Set up transparency
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   glutMainLoop();
   return 1;

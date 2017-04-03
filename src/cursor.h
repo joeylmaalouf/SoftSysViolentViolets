@@ -11,6 +11,7 @@ class Cursor {
     tuple3i position;
 
   public:
+    Cursor ();
     int getShape ();
     tuple3i getColor ();
     tuple3i getPosition ();
