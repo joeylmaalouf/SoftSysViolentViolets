@@ -16,8 +16,13 @@ class World {
     tuple3i backgroundColor;
 
   public:
-    World (map<tuple3i, Voxel> g, Cursor c, tuple3i color);
+    World (Cursor c, tuple3i color);
     void handleInput (int event);
+    void moveCursor (tuple3i position);
+    void setCursorColor (tuple3i color);
+    void setCursorShape (tuple3i shape);
+    void placeVoxel ();
+    void eraseVoxel ();
     void setBackgroundColor (tuple3i color);
 };
 
