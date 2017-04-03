@@ -45,12 +45,12 @@ void Cursor::erase (tuple3i *positions) {
   tuple3i this_pos;
   int w = (2*shape) - 1;
   for (int x = -1*(shape - 1); x < shape; x++) {
+    get<0>(this_pos) = get<0>(position) + x;
     for (int y = -1*(shape - 1); y < shape; y++) {
+      get<1>(this_pos) = get<1>(position) + y;
       for (int z = -1*(shape - 1); z < shape; z++) {
-        get<0>(this_pos) = get<0>(position) + x;
-        get<1>(this_pos) = get<1>(position) + y;
         get<2>(this_pos) = get<2>(position) + z;
-        positions[z + (w*y) + (w*w*x)] = position;
+        positions[z + (w*y) + (w*w*x)] = this_pos;
       }
     }
   }
