@@ -18,7 +18,7 @@ class Cursor {
     void setShape (int flag);
     void setColor (tuple3i newColor);
     void move (tuple3i delta);
-    void place (Voxel *voxels);
+    void place (Voxel **voxels);
     void erase (tuple3i *positions);
 };
 

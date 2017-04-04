@@ -4,11 +4,13 @@ using namespace std;
 #include <iostream>
 #include "camera.h"
 #include "cursor.h"
+#include "world.h"
 #include "util.h"
 
 Camera *camera = new Camera();
 Cursor *cursor = new Cursor();
-World *world = new World(cursor, make_tuple(0, 0, 0))
+map<tuple3i, Voxel *> grid;
+World *world = new World(grid, cursor, make_tuple(0, 0, 0));
 GLfloat mat_specular[] = {1.0, 1.0, 1.0, 1.0};
 GLfloat mat_shininess[] = {50.0};
 GLfloat light_position[] = {1.0, 1.0, 1.0, 0.0};
