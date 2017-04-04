@@ -17,8 +17,9 @@ class World {
 
   public:
     World (map<tuple3i, Voxel *> g, Cursor *c, tuple3i color);
-    void handleInput (int event);
+    map<tuple3i, Voxel *> getGrid ();
     void moveCursor (tuple3i position);
+    Cursor *getCursor ();
     void setCursorColor (tuple3i color);
     void setCursorShape (int shape);
     void placeVoxel ();

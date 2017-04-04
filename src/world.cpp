@@ -6,6 +6,14 @@ World::World (map<tuple3i, Voxel *> g, Cursor *c, tuple3i color) {
   backgroundColor = color;
 }
 
+map<tuple3i, Voxel *> World::getGrid() {
+  return grid;
+}
+
+Cursor *World::getCursor () {
+  return cursor;
+}
+
 void World::moveCursor (tuple3i position) {
   cursor->move(position);
 }

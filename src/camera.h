@@ -2,6 +2,8 @@
 #define CAMERA_H
 
 #include "cursor.h"
+#include "world.h"
+#include "util.h"
 
 void drawCube (tuple3i pos, tuple3i col, int draw_flag);
 
@@ -38,7 +40,7 @@ class Camera {
     double rotationZ = 0;
 
   public:
-    void display (Cursor *cursor);
+    void display (World *world);
     void rotateX (int degrees);
     void rotateY (int degrees);
     void rotateZ (int degrees);

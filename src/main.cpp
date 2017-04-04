@@ -20,7 +20,7 @@ void update () {
 }
 
 void display () {
-  camera->display(cursor);
+  camera->display(world);
 }
 
 void handleInput (unsigned char key, int x, int y) {
