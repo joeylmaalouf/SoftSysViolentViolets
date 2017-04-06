@@ -8,9 +8,9 @@ using namespace std;
 
 Camera *camera = new Camera();
 Cursor *cursor = new Cursor();
-GLfloat mat_specular[] = {1.0, 1.0, 1.0, 1.0};
-GLfloat mat_shininess[] = {50.0};
-GLfloat light_position[] = {1.0, 1.0, 1.0, 0.0};
+float mat_specular[] = {1.0, 1.0, 1.0, 1.0};
+float mat_shininess[] = {50.0};
+float light_position[] = {1.0, 1.0, 1.0, 0.0};
 
 void update () {
   glutPostRedisplay();
