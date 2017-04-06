@@ -77,7 +77,7 @@ void Camera::display (World *world) {
   map<tuple3i, Voxel *> grid = world->getGrid();
   drawCube(cursor->getPosition(), cursor->getColor(), GL_LINES);
   for (const auto &p : grid) {
-    drawCube(p.first, p.second->getColor(), GL_LINES);
+    drawCube(p.first, p.second->getColor(), GL_POLYGON);
   }
   // Animation uses double-buffering
   glutSwapBuffers();
