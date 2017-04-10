@@ -32,7 +32,7 @@ void Cursor::move (tuple3i delta) {
   get<2>(position) = get<2>(position) + get<2>(delta);
 }
 
-void Cursor::place (Voxel *voxels) {
+void Cursor::place (Voxel **voxels) {
   tuple3i this_pos;
   int w = (2*shape) - 1;
   for (int x = -1*(shape - 1); x < shape; x++) {
@@ -41,7 +41,8 @@ void Cursor::place (Voxel *voxels) {
       get<1>(this_pos) = get<1>(position) + y;
       for (int z = -1*(shape - 1); z < shape; z++) {
         get<2>(this_pos) = get<2>(position) + z;
-        voxels[z + (w*y) + (w*w*x)] = Voxel(this_pos, color);
+	Voxel *vox = new Voxel(this_pos, color);
+        voxels[z + (w*y) + (w*w*x)] = vox;
       }
     }
   }

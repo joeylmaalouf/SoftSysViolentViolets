@@ -4,20 +4,23 @@ using namespace std;
 #include <iostream>
 #include "camera.h"
 #include "cursor.h"
+#include "world.h"
 #include "util.h"
 
 Camera *camera = new Camera();
 Cursor *cursor = new Cursor();
-float mat_specular[] = {1.0, 1.0, 1.0, 1.0};
-float mat_shininess[] = {50.0};
-float light_position[] = {1.0, 1.0, 1.0, 0.0};
+map<tuple3i, Voxel *> grid;
+World *world = new World(grid, cursor, make_tuple(0, 0, 0));
+GLfloat mat_specular[] = {1.0, 1.0, 1.0, 1.0};
+GLfloat mat_shininess[] = {50.0};
+GLfloat light_position[] = {1.0, 1.0, 1.0, 0.0};
 
 void update () {
   glutPostRedisplay();
 }
 
 void display () {
-  camera->display(cursor);
+  camera->display(world);
 }
 
 void handleInput (unsigned char key, int x, int y) {
@@ -82,6 +85,22 @@ void handleSpecialInput (int key, int x, int y) {
   glutPostRedisplay();
 }
 
+void handleMouseInput (int button, int state, int x, int y) {
+  switch (button) {
+    case GLUT_LEFT_BUTTON:
+      if (state == GLUT_UP) {
+        world->placeVoxel();
+      }
+      break;
+    case GLUT_RIGHT_BUTTON:
+      if (state == GLUT_UP) {
+        world->eraseVoxel();
+      }
+      break;
+  }
+  glutPostRedisplay();
+}
+
 int main (int argc, char *argv[]) {
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
@@ -93,6 +112,7 @@ int main (int argc, char *argv[]) {
   glutDisplayFunc(display);
   glutKeyboardFunc(handleInput); // https://www.opengl.org/resources/libraries/glut/spec3/node49.html
   glutSpecialFunc(handleSpecialInput);
+  glutMouseFunc(handleMouseInput);
 
   // Set up material
   glShadeModel(GL_SMOOTH);

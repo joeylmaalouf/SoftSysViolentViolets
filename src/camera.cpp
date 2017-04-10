@@ -14,7 +14,7 @@ void drawCube (tuple3i pos, tuple3i col, int draw_flag) {
 
   glPushMatrix();
   glTranslatef(x, y, z);
-  glColor4b(r, g, b, 64);
+  glColor4b(r, g, b, 127);
 
   if (draw_flag == GL_LINES) {
     glutWireCube(size);
@@ -25,7 +25,7 @@ void drawCube (tuple3i pos, tuple3i col, int draw_flag) {
   glPopMatrix();
 }
 
-void Camera::display (Cursor *cursor) {
+void Camera::display (World *world) {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   // Set up the projection matrix
@@ -47,8 +47,13 @@ void Camera::display (Cursor *cursor) {
   glRotated(rotationZ, 0.0, 0.0, 1.0);
 
   // This is where drawing will happen
-  drawCube(cursor->getPosition(), cursor->getColor(), GL_LINES);
+  Cursor *cursor = world->getCursor();
+  map<tuple3i, Voxel *> grid = world->getGrid();
+  for (const auto &p : grid) {
+    drawCube(p.first, p.second->getColor(), GL_POLYGON);
+  } 
 
+  drawCube(cursor->getPosition(), cursor->getColor(), GL_LINES);
   // Animation uses double-buffering
   glutSwapBuffers();
 }
