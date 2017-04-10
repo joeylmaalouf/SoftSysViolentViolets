@@ -2,6 +2,7 @@
 #define UTIL_H
 
 #include <tuple>
+#include <algorithm>
 
 using namespace std;
 
