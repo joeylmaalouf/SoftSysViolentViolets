@@ -23,7 +23,8 @@ void drawCube (tuple3i pos, tuple3i col, int draw_flag) {
   if (draw_flag == GL_LINES) {
     glEnable(GL_BLEND);
     glutWireCube(size);
-  } else {
+  }
+  else {
     glDisable(GL_BLEND);
     glutSolidCube(size);
   }
@@ -57,6 +58,7 @@ void Camera::display (World *world) {
   for (const auto &p : grid) {
     drawCube(p.first, p.second->getColor(), GL_POLYGON);
   }
+
   Cursor *cursor = world->getCursor();
   drawCube(cursor->getPosition(), cursor->getColor(), GL_LINES);
 

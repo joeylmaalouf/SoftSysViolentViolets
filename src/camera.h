@@ -2,8 +2,8 @@
 #define CAMERA_H
 
 #include "cursor.h"
-#include "world.h"
 #include "util.h"
+#include "world.h"
 
 void drawCube (tuple3i pos, tuple3i col, int draw_flag);
 
