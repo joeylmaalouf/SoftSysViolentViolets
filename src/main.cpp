@@ -58,7 +58,7 @@ void handleInput (unsigned char key, int x, int y) {
       cout << "Please enter a filename for the exported .stl: ";
       cin >> filepath;
       if (filepath != "") {
-        export_stl(world, filepath);
+        exportStl(world, filepath);
       }
       break;
   }

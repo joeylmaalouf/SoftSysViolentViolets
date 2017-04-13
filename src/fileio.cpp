@@ -1,12 +1,44 @@
 #include <fstream>
 #include <iostream>
-#include <vector>
+#include <sstream>
 #include "fileio.h"
 
-void import_stl (string filepath) {
+vector<vector<float>> getCorners (float x, float y, float z, float s) {
+  return {
+    {x - s, y - s, z - s},
+    {x - s, y - s, z + s},
+    {x - s, y + s, z - s},
+    {x - s, y + s, z + s},
+    {x + s, y - s, z - s},
+    {x + s, y - s, z + s},
+    {x + s, y + s, z - s},
+    {x + s, y + s, z + s}
+  };
 }
 
-void export_stl (World *world, string filepath) {
+vector<vector<vector<float>>> getTriangles (vector<vector<float>> corners) {
+  return {
+    {corners[0], corners[1], corners[2]}, {corners[1], corners[2], corners[3]},
+    {corners[0], corners[1], corners[4]}, {corners[1], corners[4], corners[5]},
+    {corners[0], corners[2], corners[4]}, {corners[2], corners[4], corners[6]},
+    {corners[2], corners[3], corners[6]}, {corners[3], corners[6], corners[7]},
+    {corners[4], corners[5], corners[6]}, {corners[5], corners[6], corners[7]},
+    {corners[1], corners[3], corners[5]}, {corners[3], corners[5], corners[7]}
+  };
+}
+
+string buildFacetString (int n, vector<vector<float>> triangle) {
+  stringstream s;
+  s << "facet normal 0.0e1 0.0e1 " << n << ".0e1" << endl << "    outer loop" << endl;
+  for (int i = 0; i < 3; ++i) {
+    vector<float> point = triangle[i];
+    s << "        vertex " << point[0] << "e1 " << point[1] << "e1 " << point[2] << "e1" << endl;
+  }
+  s << "    endloop" << endl << "endfacet" << endl;
+  return s.str();
+}
+
+void exportStl (World *world, string filepath) {
   ofstream fs;
   fs.open(filepath + ".stl");
   if (!fs.is_open()) {
@@ -14,44 +46,24 @@ void export_stl (World *world, string filepath) {
     return;
   }
 
+  // https://en.wikipedia.org/wiki/STL_(file_format)#ASCII_STL
   fs << "solid " << filepath << endl;
 
   map<tuple3i, Voxel *> grid = world->getGrid();
   int n = 0;
-  for (const auto &g : grid) {
+  for (const auto &v : grid) {
     int size = 1; // same as in drawCube, maybe make into an attribute of Voxel?
+    float x = (float)get<0>(v.first);
+    float y = (float)get<1>(v.first);
+    float z = (float)get<2>(v.first);
     float s = size / 2.0;
-    float x = (float)get<0>(g.first);
-    float y = (float)get<1>(g.first);
-    float z = (float)get<2>(g.first);
 
-    vector<vector<float>> corners = {
-      {x - s, y - s, z - s},
-      {x - s, y - s, z + s},
-      {x - s, y + s, z - s},
-      {x - s, y + s, z + s},
-      {x + s, y - s, z - s},
-      {x + s, y - s, z + s},
-      {x + s, y + s, z - s},
-      {x + s, y + s, z + s}
-    };
+    vector<vector<float>> corners = getCorners(x, y, z, s);
 
-    vector<vector<vector<float>>> triangles = {
-      {corners[0], corners[1], corners[2]}, {corners[1], corners[2], corners[3]},
-      {corners[0], corners[1], corners[4]}, {corners[1], corners[4], corners[5]},
-      {corners[0], corners[2], corners[4]}, {corners[2], corners[4], corners[6]},
-      {corners[2], corners[3], corners[6]}, {corners[3], corners[6], corners[7]},
-      {corners[4], corners[5], corners[6]}, {corners[5], corners[6], corners[7]},
-      {corners[1], corners[3], corners[5]}, {corners[3], corners[5], corners[7]}
-    };
+    vector<vector<vector<float>>> triangles = getTriangles(corners);
 
     for (vector<vector<float>> t : triangles) {
-      fs << "facet normal 0.0e1 0.0e1 " << n << ".0e1" << endl << "    outer loop" << endl;
-      for (int i = 0; i < 3; ++i) {
-        vector<float> point = t[i];
-        fs << "        vertex " << point[0] << "e1 " << point[1] << "e1 " << point[2] << "e1" << endl;
-      }
-      fs << "    endloop" << endl << "endfacet" << endl;
+      fs << buildFacetString(n, t);
       ++n;
     }
   }
@@ -59,4 +71,7 @@ void export_stl (World *world, string filepath) {
   fs << "endsolid " << filepath << endl;
 
   fs.close();
+}
+
+void importStl (string filepath) {
 }
