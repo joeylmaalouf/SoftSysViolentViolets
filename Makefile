@@ -1,8 +1,14 @@
 CC = g++
 COMPILE_FLAGS = -Wall -std=c++11
-GRAPHICS_FLAGS = -lglut -lGL -lGLU
 SRC_DIR = ./src
 BUILD_DIR = ./build
+OS := $(shell uname)
+ifeq ($(OS), Darwin)
+  # MAC
+  GRAPHICS_FLAGS = -framework OpenGL -framework GLUT
+else
+  GRAPHICS_FLAGS = -lglut -lGL -lGLU
+endif
 
 # make build directory if it doesn't exist
 dummy := $(shell mkdir -p $(BUILD_DIR))
