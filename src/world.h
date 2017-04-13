@@ -11,20 +11,20 @@
  */
 class World {
   private:
-    map<tuple3i, Voxel *> grid;
+    map<vector<int>, Voxel *> grid;
     Cursor *cursor;
-    tuple3i backgroundColor;
+    vector<int> backgroundColor;
 
   public:
-    World (map<tuple3i, Voxel *> g, Cursor *c, tuple3i color);
-    map<tuple3i, Voxel *> getGrid ();
-    void moveCursor (tuple3i position);
+    World (map<vector<int>, Voxel *> g, Cursor *c, vector<int> color);
+    map<vector<int>, Voxel *> getGrid ();
+    void moveCursor (vector<int> position);
     Cursor *getCursor ();
-    void setCursorColor (tuple3i color);
+    void setCursorColor (vector<int> color);
     void setCursorShape (int shape);
     void placeVoxel ();
     void eraseVoxel ();
-    void setBackgroundColor (tuple3i color);
+    void setBackgroundColor (vector<int> color);
 };
 
 #endif /* WORLD_H */

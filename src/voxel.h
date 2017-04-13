@@ -5,13 +5,13 @@
 
 class Voxel {
   private:
-    tuple3i pos;
-    tuple3i col;
+    vector<int> pos;
+    vector<int> col;
 
   public:
-    Voxel (tuple3i p, tuple3i c);
-    tuple3i getPosition ();
-    tuple3i getColor ();
+    Voxel (vector<int> p, vector<int> c);
+    vector<int> getPosition ();
+    vector<int> getColor ();
 };
 
 #endif /* VOXEL_H */

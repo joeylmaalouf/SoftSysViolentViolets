@@ -1,7 +1,6 @@
 #ifndef FILEIO_H
 #define FILEIO_H
 
-#include <vector>
 #include "util.h"
 #include "world.h"
 
