@@ -1,5 +1,3 @@
-using namespace std;
-
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
@@ -114,7 +112,7 @@ int main (int argc, char *argv[]) {
   // Bind functions
   glutIdleFunc(update);
   glutDisplayFunc(display);
-  glutKeyboardFunc(handleInput); // https://www.opengl.org/resources/libraries/glut/spec3/node49.html
+  glutKeyboardFunc(handleInput);
   glutSpecialFunc(handleSpecialInput);
   glutMouseFunc(handleMouseInput);
 
@@ -129,9 +127,13 @@ int main (int argc, char *argv[]) {
   glEnable(GL_LIGHT0);
   glEnable(GL_DEPTH_TEST);
 
-  // Set up transparency
+  // Set up color blending
   glEnable(GL_BLEND);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_COLOR);
+
+  // Set up line drawing
+  glEnable(GL_LINE_SMOOTH);
+  glLineWidth(1.5);
 
   glutMainLoop();
   return 1;
