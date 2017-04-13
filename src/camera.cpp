@@ -1,4 +1,8 @@
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
 #include <GL/glut.h>
+#endif
 #include <math.h>
 #include "camera.h"
 #include "util.h"
@@ -17,9 +21,11 @@ void drawCube (tuple3i pos, tuple3i col, int draw_flag) {
   glColor4b(r, g, b, 127);
 
   if (draw_flag == GL_LINES) {
+    glEnable(GL_BLEND);
     glutWireCube(size);
   }
   else {
+    glDisable(GL_BLEND);
     glutSolidCube(size);
   }
 
@@ -47,14 +53,15 @@ void Camera::display (World *world) {
   glRotated(rotationY, 0.0, 1.0, 0.0);
   glRotated(rotationZ, 0.0, 0.0, 1.0);
 
-  // This is where drawing will happen
-  Cursor *cursor = world->getCursor();
+  // Draw the voxels and cursor in the world
   map<tuple3i, Voxel *> grid = world->getGrid();
   for (const auto &p : grid) {
     drawCube(p.first, p.second->getColor(), GL_POLYGON);
   }
 
+  Cursor *cursor = world->getCursor();
   drawCube(cursor->getPosition(), cursor->getColor(), GL_LINES);
+
   // Animation uses double-buffering
   glutSwapBuffers();
 }
