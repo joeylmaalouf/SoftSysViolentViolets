@@ -18,7 +18,8 @@ void drawCube (tuple3i pos, tuple3i col, int draw_flag) {
 
   if (draw_flag == GL_LINES) {
     glutWireCube(size);
-  } else {
+  }
+  else {
     glutSolidCube(size);
   }
 
@@ -51,7 +52,7 @@ void Camera::display (World *world) {
   map<tuple3i, Voxel *> grid = world->getGrid();
   for (const auto &p : grid) {
     drawCube(p.first, p.second->getColor(), GL_POLYGON);
-  } 
+  }
 
   drawCube(cursor->getPosition(), cursor->getColor(), GL_LINES);
   // Animation uses double-buffering

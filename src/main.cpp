@@ -4,6 +4,7 @@ using namespace std;
 #include <iostream>
 #include "camera.h"
 #include "cursor.h"
+#include "fileio.h"
 #include "world.h"
 #include "util.h"
 
@@ -51,6 +52,14 @@ void handleInput (unsigned char key, int x, int y) {
       break;
     case 'r':
       camera->reset();
+      break;
+    case ' ':
+      string filepath;
+      cout << "Please enter a filename for the exported .stl: ";
+      cin >> filepath;
+      if (filepath != "") {
+        export_stl(world, filepath);
+      }
       break;
   }
   glutPostRedisplay();
