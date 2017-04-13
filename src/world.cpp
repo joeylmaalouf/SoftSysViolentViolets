@@ -27,9 +27,9 @@ void World::setCursorShape (int shape) {
 }
 
 void World::placeVoxel () {
-  Voxel **voxels;
+  int num_voxels = cursor->getShape();
+  Voxel **voxels = new Voxel*[num_voxels];
   cursor->place(voxels);
-  int num_voxels = 1;
   for (int i = 0; i < num_voxels; i++) {
     Voxel *vox = voxels[i];
     grid[vox->getPosition()] = vox;
@@ -37,9 +37,9 @@ void World::placeVoxel () {
 }
 
 void World::eraseVoxel () {
-  tuple3i *positions;
+  int num_positions = cursor->getShape();
+  tuple3i *positions = new tuple3i[num_positions];
   cursor->erase(positions);
-  int num_positions = 1;
   for (int i = 0; i < num_positions; i++) {
     grid.erase(positions[i]);
   }
