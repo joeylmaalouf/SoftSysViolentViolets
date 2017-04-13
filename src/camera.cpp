@@ -3,6 +3,7 @@
 #else
 #include <GL/glut.h>
 #endif
+
 #include <math.h>
 #include "camera.h"
 #include "util.h"

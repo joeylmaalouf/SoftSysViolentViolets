@@ -128,12 +128,14 @@ int main (int argc, char *argv[]) {
 
   // Set up material
   glShadeModel(GL_SMOOTH);
+  glEnable(GL_COLOR_MATERIAL);
+  glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
   glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
   glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
 
   // Set up lighting
   glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-  // glEnable(GL_LIGHTING);
+  glEnable(GL_LIGHTING);
   glEnable(GL_LIGHT0);
   glEnable(GL_DEPTH_TEST);
 
