@@ -22,3 +22,7 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(wildcard $(SRC_DIR)/%.h)
 .PHONY: clean
 clean :
 	rm -f $(BUILD_DIR)/*
+
+.PHONY: lint
+lint :
+	cpplint src/*.cpp

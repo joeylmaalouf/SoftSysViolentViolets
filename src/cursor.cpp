@@ -41,7 +41,7 @@ void Cursor::place (Voxel **voxels) {
       get<1>(this_pos) = get<1>(position) + y;
       for (int z = -1*(shape - 1); z < shape; z++) {
         get<2>(this_pos) = get<2>(position) + z;
-	Voxel *vox = new Voxel(this_pos, color);
+    Voxel *vox = new Voxel(this_pos, color);
         voxels[z + (w*y) + (w*w*x)] = vox;
       }
     }
