@@ -3,14 +3,15 @@
 #else
 #include <GL/glut.h>
 #endif
+
 #include <math.h>
 #include "camera.h"
 #include "util.h"
 
 void drawCube (tuple3i pos, tuple3i col, int draw_flag) {
-  float x = (float)get<0>(pos);
-  float y = (float)get<1>(pos);
-  float z = (float)get<2>(pos);
+  float x = static_cast<float>(get<0>(pos));
+  float y = static_cast<float>(get<1>(pos));
+  float z = static_cast<float>(get<2>(pos));
   int r = get<0>(col);
   int g = get<1>(col);
   int b = get<2>(col);
@@ -23,8 +24,7 @@ void drawCube (tuple3i pos, tuple3i col, int draw_flag) {
   if (draw_flag == GL_LINES) {
     glEnable(GL_BLEND);
     glutWireCube(size);
-  }
-  else {
+  } else {
     glDisable(GL_BLEND);
     glutSolidCube(size);
   }
