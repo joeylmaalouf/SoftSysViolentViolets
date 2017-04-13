@@ -24,8 +24,7 @@ void drawCube (tuple3i pos, tuple3i col, int draw_flag) {
   if (draw_flag == GL_LINES) {
     glEnable(GL_BLEND);
     glutWireCube(size);
-  }
-  else {
+  } else {
     glDisable(GL_BLEND);
     glutSolidCube(size);
   }

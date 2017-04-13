@@ -52,10 +52,10 @@ void exportStl (World *world, string filepath) {
   map<tuple3i, Voxel *> grid = world->getGrid();
   int n = 0;
   for (const auto &v : grid) {
-    int size = 1; // same as in drawCube, maybe make into an attribute of Voxel?
-    float x = (float)get<0>(v.first);
-    float y = (float)get<1>(v.first);
-    float z = (float)get<2>(v.first);
+    int size = 1;  // same as in drawCube, maybe make into an attribute of Voxel?
+    float x = static_cast<float>(get<0>(v.first));
+    float y = static_cast<float>(get<1>(v.first));
+    float z = static_cast<float>(get<2>(v.first));
     float s = size / 2.0;
 
     vector<vector<float>> corners = getCorners(x, y, z, s);
