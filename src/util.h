@@ -1,13 +1,16 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-#include <tuple>
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
+
 #include <algorithm>
+#include <math.h>
+#include <vector>
 
 using namespace std;
-
-#ifndef tuple3i
-  #define tuple3i tuple<int, int, int>
-#endif
 
 #endif /* UTIL_H */

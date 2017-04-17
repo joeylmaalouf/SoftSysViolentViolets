@@ -5,7 +5,7 @@
 #include "util.h"
 #include "world.h"
 
-void drawCube (tuple3i pos, tuple3i col, int draw_flag);
+void drawCube (vector<int> pos, vector<int> col, int draw_flag);
 
 class Camera {
   private:

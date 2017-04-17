@@ -30,7 +30,7 @@ vector<vector<vector<float>>> getTriangles (vector<vector<float>> corners) {
 string buildFacetString (int n, vector<vector<float>> triangle) {
   stringstream s;
   s << "facet normal 0.0e1 0.0e1 " << n << ".0e1" << endl << "    outer loop" << endl;
-  for (int i = 0; i < 3; ++i) {
+  for (int i = 0; i < 3; i++) {
     vector<float> point = triangle[i];
     s << "        vertex " << point[0] << "e1 " << point[1] << "e1 " << point[2] << "e1" << endl;
   }
@@ -49,13 +49,13 @@ void exportStl (World *world, string filepath) {
   // https://en.wikipedia.org/wiki/STL_(file_format)#ASCII_STL
   fs << "solid " << filepath << endl;
 
-  map<tuple3i, Voxel *> grid = world->getGrid();
+  map<vector<int>, Voxel *> grid = world->getGrid();
   int n = 0;
   for (const auto &v : grid) {
     int size = 1;  // same as in drawCube, maybe make into an attribute of Voxel?
-    float x = static_cast<float>(get<0>(v.first));
-    float y = static_cast<float>(get<1>(v.first));
-    float z = static_cast<float>(get<2>(v.first));
+    float x = (float)v.first[0];
+    float y = (float)v.first[1];
+    float z = (float)v.first[2];
     float s = size / 2.0;
 
     vector<vector<float>> corners = getCorners(x, y, z, s);
@@ -64,7 +64,7 @@ void exportStl (World *world, string filepath) {
 
     for (vector<vector<float>> t : triangles) {
       fs << buildFacetString(n, t);
-      ++n;
+      n++;
     }
   }
 

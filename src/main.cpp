@@ -13,8 +13,8 @@
 
 Camera *camera = new Camera();
 Cursor *cursor = new Cursor();
-map<tuple3i, Voxel *> grid;
-World *world = new World(grid, cursor, make_tuple(0, 0, 0));
+map<vector<int>, Voxel *> grid;
+World *world = new World(grid, cursor, {0, 0, 0});
 GLfloat mat_specular[] = {1.0, 1.0, 1.0, 1.0};
 GLfloat mat_shininess[] = {50.0};
 GLfloat light_position[] = {1.0, 1.0, 1.0, 0.0};
@@ -93,7 +93,7 @@ void handleSpecialInput (int key, int x, int y) {
       dz = 1;
       break;
   }
-  cursor->move(make_tuple(dx, dy, dz));
+  cursor->move({dx, dy, dz});
   glutPostRedisplay();
 }
 

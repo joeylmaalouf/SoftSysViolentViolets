@@ -1,14 +1,14 @@
 #include "voxel.h"
 
-Voxel::Voxel (tuple3i p, tuple3i c) {
+Voxel::Voxel (vector<int> p, vector<int> c) {
   pos = p;
   col = c;
 }
 
-tuple3i Voxel::getPosition () {
+vector<int> Voxel::getPosition () {
   return pos;
 }
 
-tuple3i Voxel::getColor () {
+vector<int> Voxel::getColor () {
   return col;
 }

@@ -1,20 +1,21 @@
+#include <iostream>
 #include "cursor.h"
 
 Cursor::Cursor () {
   shape = 1;
-  color = make_tuple(0, 96, 0);
-  position = make_tuple(0, 0, 0);
+  color = {0, 96, 0};
+  position = {0, 0, 0};
 }
 
 int Cursor::getShape () {
   return shape;
 }
 
-tuple3i Cursor::getColor () {
+vector<int> Cursor::getColor () {
   return color;
 }
 
-tuple3i Cursor::getPosition () {
+vector<int> Cursor::getPosition () {
   return position;
 }
 
@@ -22,25 +23,25 @@ void Cursor::setShape (int flag) {
   shape = max(flag, 1);
 }
 
-void Cursor::setColor (tuple3i newColor) {
+void Cursor::setColor (vector<int> newColor) {
   color = newColor;
 }
 
-void Cursor::move (tuple3i delta) {
-  get<0>(position) = get<0>(position) + get<0>(delta);
-  get<1>(position) = get<1>(position) + get<1>(delta);
-  get<2>(position) = get<2>(position) + get<2>(delta);
+void Cursor::move (vector<int> delta) {
+  position[0] += delta[0];
+  position[1] += delta[1];
+  position[2] += delta[2];
 }
 
 void Cursor::place (Voxel **voxels) {
-  tuple3i this_pos;
+  vector<int> this_pos = {0, 0, 0};
   int w = (2*shape) - 1;
   for (int x = -1*(shape - 1); x < shape; x++) {
-    get<0>(this_pos) = get<0>(position) + x;
+    this_pos[0] = position[0] + x;
     for (int y = -1*(shape - 1); y < shape; y++) {
-      get<1>(this_pos) = get<1>(position) + y;
+      this_pos[1] = position[1] + y;
       for (int z = -1*(shape - 1); z < shape; z++) {
-        get<2>(this_pos) = get<2>(position) + z;
+        this_pos[2] = position[2] + z;
         Voxel *vox = new Voxel(this_pos, color);
         voxels[z + (w*y) + (w*w*x)] = vox;
       }
@@ -48,15 +49,15 @@ void Cursor::place (Voxel **voxels) {
   }
 }
 
-void Cursor::erase (tuple3i *positions) {
-  tuple3i this_pos;
+void Cursor::erase (vector<int> *positions) {
+  vector<int> this_pos = {0, 0, 0};
   int w = (2*shape) - 1;
   for (int x = -1*(shape - 1); x < shape; x++) {
-    get<0>(this_pos) = get<0>(position) + x;
+    this_pos[0] = position[0] + x;
     for (int y = -1*(shape - 1); y < shape; y++) {
-      get<1>(this_pos) = get<1>(position) + y;
+      this_pos[1] = position[1] + y;
       for (int z = -1*(shape - 1); z < shape; z++) {
-        get<2>(this_pos) = get<2>(position) + z;
+        this_pos[2] = position[2] + z;
         positions[z + (w*y) + (w*w*x)] = this_pos;
       }
     }

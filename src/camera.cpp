@@ -1,25 +1,15 @@
-#ifdef __APPLE__
-#include <GLUT/glut.h>
-#else
-#include <GL/glut.h>
-#endif
-
-#include <math.h>
 #include "camera.h"
 #include "util.h"
 
-void drawCube (tuple3i pos, tuple3i col, int draw_flag) {
-  float x = static_cast<float>(get<0>(pos));
-  float y = static_cast<float>(get<1>(pos));
-  float z = static_cast<float>(get<2>(pos));
-  int r = get<0>(col);
-  int g = get<1>(col);
-  int b = get<2>(col);
+void drawCube (vector<int> pos, vector<int> col, int draw_flag) {
+  float x = (float)pos[0];
+  float y = (float)pos[1];
+  float z = (float)pos[2];
   int size = 1;
 
   glPushMatrix();
   glTranslatef(x, y, z);
-  glColor4b(r, g, b, 127);
+  glColor4b(col[0], col[1], col[2], 127);
 
   if (draw_flag == GL_LINES) {
     glEnable(GL_BLEND);
@@ -54,7 +44,7 @@ void Camera::display (World *world) {
   glRotated(rotationZ, 0.0, 0.0, 1.0);
 
   // Draw the voxels and cursor in the world
-  map<tuple3i, Voxel *> grid = world->getGrid();
+  map<vector<int>, Voxel *> grid = world->getGrid();
   for (const auto &p : grid) {
     drawCube(p.first, p.second->getColor(), GL_POLYGON);
   }

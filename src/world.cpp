@@ -1,12 +1,12 @@
 #include "world.h"
 
-World::World (map<tuple3i, Voxel *> g, Cursor *c, tuple3i color) {
+World::World (map<vector<int>, Voxel *> g, Cursor *c, vector<int> color) {
   grid = g;
   cursor = c;
   backgroundColor = color;
 }
 
-map<tuple3i, Voxel *> World::getGrid() {
+map<vector<int>, Voxel *> World::getGrid() {
   return grid;
 }
 
@@ -14,11 +14,11 @@ Cursor *World::getCursor () {
   return cursor;
 }
 
-void World::moveCursor (tuple3i position) {
+void World::moveCursor (vector<int> position) {
   cursor->move(position);
 }
 
-void World::setCursorColor (tuple3i color) {
+void World::setCursorColor (vector<int> color) {
   cursor->setColor(color);
 }
 
@@ -38,13 +38,13 @@ void World::placeVoxel () {
 
 void World::eraseVoxel () {
   int num_positions = cursor->getShape();
-  tuple3i *positions = new tuple3i[num_positions];
+  vector<int> *positions = new vector<int>[num_positions];
   cursor->erase(positions);
   for (int i = 0; i < num_positions; i++) {
     grid.erase(positions[i]);
   }
 }
 
-void World::setBackgroundColor (tuple3i color) {
+void World::setBackgroundColor (vector<int> color) {
   backgroundColor = color;
 }
