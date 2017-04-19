@@ -1,4 +1,3 @@
-#include <iostream>
 #include "cursor.h"
 
 Cursor::Cursor () {
