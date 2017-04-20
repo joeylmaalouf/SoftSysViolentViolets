@@ -1,11 +1,10 @@
 #include "camera.h"
 #include "util.h"
 
-void drawCube (vector<int> pos, vector<int> col, int draw_flag) {
+void drawCube (vector<int> pos, vector<int> col, int size, int draw_flag) {
   float x = (float)pos[0];
   float y = (float)pos[1];
   float z = (float)pos[2];
-  int size = 1;
 
   glPushMatrix();
   glTranslatef(x, y, z);
@@ -46,11 +45,12 @@ void Camera::display (World *world) {
   // Draw the voxels and cursor in the world
   map<vector<int>, Voxel *> grid = world->getGrid();
   for (const auto &p : grid) {
-    drawCube(p.first, p.second->getColor(), GL_POLYGON);
+    drawCube(p.first, p.second->getColor(), 1, GL_POLYGON);
   }
 
   Cursor *cursor = world->getCursor();
-  drawCube(cursor->getPosition(), cursor->getColor(), GL_LINES);
+  int radius = cursor->getSize();
+  drawCube(cursor->getPosition(), cursor->getColor(), 2 * radius - 1, GL_LINES);
 
   // Animation uses double-buffering
   glutSwapBuffers();

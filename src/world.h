@@ -1,14 +1,10 @@
 #ifndef WORLD_H
 #define WORLD_H
 
-#include <map>
 #include "cursor.h"
 #include "util.h"
 #include "voxel.h"
 
-/*
- * Class representing the world of the drawing
- */
 class World {
   private:
     map<vector<int>, Voxel *> grid;
@@ -21,9 +17,9 @@ class World {
     void moveCursor (vector<int> position);
     Cursor *getCursor ();
     void setCursorColor (vector<int> color);
-    void setCursorShape (int shape);
-    void placeVoxel ();
-    void eraseVoxel ();
+    void setCursorSize (int size);
+    void placeVoxels ();
+    void eraseVoxels ();
     void setBackgroundColor (vector<int> color);
 };
 

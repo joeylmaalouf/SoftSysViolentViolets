@@ -56,6 +56,12 @@ void handleInput (unsigned char key, int x, int y) {
     case 'r':
       camera->reset();
       break;
+    case '-':
+      cursor->setSize(cursor->getSize() - 1);
+      break;
+    case '=':
+      cursor->setSize(cursor->getSize() + 1);
+      break;
     case ' ':
       string filepath;
       cout << "Please enter a filename for the exported .stl: ";
@@ -101,12 +107,12 @@ void handleMouseInput (int button, int state, int x, int y) {
   switch (button) {
     case GLUT_LEFT_BUTTON:
       if (state == GLUT_UP) {
-        world->placeVoxel();
+        world->placeVoxels();
       }
       break;
     case GLUT_RIGHT_BUTTON:
       if (state == GLUT_UP) {
-        world->eraseVoxel();
+        world->eraseVoxels();
       }
       break;
   }

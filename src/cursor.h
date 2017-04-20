@@ -6,20 +6,19 @@
 
 class Cursor {
   private:
-    int shape;
+    int radius;
     vector<int> color;
     vector<int> position;
 
   public:
     Cursor ();
-    int getShape ();
+    int getSize ();
     vector<int> getColor ();
     vector<int> getPosition ();
-    void setShape (int flag);
+    vector<vector<int>> getCoords ();
+    void setSize (int size);
     void setColor (vector<int> newColor);
     void move (vector<int> delta);
-    void place (Voxel **voxels);
-    void erase (vector<int> *positions);
 };
 
 #endif /* CURSOR_H */
