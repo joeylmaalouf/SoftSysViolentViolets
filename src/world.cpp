@@ -89,13 +89,13 @@ void World::redo () {
   if (!redos.empty()) {
     Diff *d = redos.pop();
 
-    // erase things the undo-being-undone added
+    // erase things the undo-being-redone added
     for (int i = 0; i < d->num_removed; i++) {
       Voxel *r = d->removed[i];
       grid.erase(r->getPosition());
     }
 
-    // put back things the undo-being-undone removed
+    // put back things the undo-being-redone removed
     for (int i = 0; i < d->num_added; i++) {
       Voxel *a = d->added[i];
       grid[a->getPosition()] = a;
