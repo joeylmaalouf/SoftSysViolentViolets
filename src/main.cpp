@@ -67,6 +67,12 @@ void handleInput (unsigned char key, int x, int y) {
   string red_s;
   string green_s;
   string blue_s;
+
+  int ctrl = glutGetModifiers() & GLUT_ACTIVE_CTRL;
+  if (ctrl) {
+    key += 96;  // control key subtracts 96 from key value, for some reason (?)
+  }
+
   switch (key) {
     case 'w':
       camera->rotateX(10);
@@ -103,10 +109,11 @@ void handleInput (unsigned char key, int x, int y) {
     case 'h':
       displayUsage();
     case 'u':
-      world->undo();
-      break;
-    case 'i':
-      world->redo();
+      if (ctrl) {
+        world->redo();
+      } else {
+        world->undo();
+      }
       break;
     case ' ':
       cout << "Please enter a filename for the exported .stl: ";
