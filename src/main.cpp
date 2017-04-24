@@ -55,6 +55,9 @@ void displayUsage () {
                 "  x  : zoom out\n"
                 "  r  : reset\n"
            BOLD "Other controls:\n" UNBOLD
+                "  c<red><green><blue>: set color with rgb values\n"
+                "  k<path/to/file>: export current world to .3dp\n"
+                "  l<path/to/file>: load existing world from .3dp\n"
                 "  <space><path/to/file>: export current world to .stl\n"
                 "  h: display help menu\n"
                 "  ctrl-c (in terminal): exit\n";
@@ -62,6 +65,9 @@ void displayUsage () {
 
 void handleInput (unsigned char key, int x, int y) {
   string filepath;
+  string red_s;
+  string green_s;
+  string blue_s;
   switch (key) {
     case 'w':
       camera->rotateX(10);
@@ -98,6 +104,19 @@ void handleInput (unsigned char key, int x, int y) {
       break;
     case 'h':
       displayUsage();
+      break;
+    case 'c':
+      cout << "Please enter a red value (0-127): ";
+      cin >> red_s;
+      cout << "Please enter a green value (0-127): ";
+      cin >> green_s;
+      cout << "Please enter a blue value (0-127): ";
+      cin >> blue_s;
+      int red = stoi(red_s);
+      int green = stoi(green_s);
+      int blue = stoi(blue_s);
+      vector<int> color = {red, green, blue};
+      cursor->setColor(color);
       break;
     case ' ':
       cout << "Please enter a filename for the exported .stl: ";
