@@ -48,6 +48,9 @@ void displayUsage () {
                 "  mouse r-click: delete\n"
                 "  -            : decrease cursor size\n"
                 "  =            : increase cursor size\n"
+          BOLD  "History:\n" UNBOLD
+                "  u: undo\n"
+                "  ctrl-u: redo\n"
           BOLD  "Camera controls:\n" UNBOLD
                 "  w/s: rotate around x-axis\n"
                 "  a/d: rotate around y-axis\n"
@@ -57,9 +60,9 @@ void displayUsage () {
                 "  r  : reset\n"
           BOLD "Other controls:\n" UNBOLD
                "  c<red><green><blue>: set color with rgb values\n"
-               "  <space><path/to/file>: export current world to .stl\n" 
+               "  <space><path/to/file>: export current world to .stl\n"
                "  h: display help menu\n"
-               "  crtl-c (in terminal): exit\n";
+               "  ctrl-c (in terminal): exit\n";
 }
 
 void handleInput (unsigned char key, int x, int y) {
@@ -67,6 +70,12 @@ void handleInput (unsigned char key, int x, int y) {
   string red_s;
   string green_s;
   string blue_s;
+
+  int ctrl = glutGetModifiers() & GLUT_ACTIVE_CTRL;
+  if (ctrl) {
+    key += 96;  // control key subtracts 96 from key value, for some reason (?)
+  }
+
   switch (key) {
     case 'w':
       camera->rotateX(10);
@@ -102,6 +111,12 @@ void handleInput (unsigned char key, int x, int y) {
       cursor->setSize(cursor->getSize() + 1);
     case 'h':
       displayUsage();
+    case 'u':
+      if (ctrl) {
+        world->redo();
+      } else {
+        world->undo();
+      }
       break;
     case ' ':
       cout << "Please enter a filename for the exported .stl: ";
@@ -123,7 +138,6 @@ void handleInput (unsigned char key, int x, int y) {
       vector<int> color = {red, green, blue};
       cursor->setColor(color);
       break;
-
   }
   glutPostRedisplay();
 }
