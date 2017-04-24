@@ -8,6 +8,7 @@
 #endif
 
 #include <algorithm>
+#include <map>
 #include <math.h>
 #include <vector>
 

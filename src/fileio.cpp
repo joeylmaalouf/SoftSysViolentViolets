@@ -52,7 +52,7 @@ void exportStl (World *world, string filepath) {
   map<vector<int>, Voxel *> grid = world->getGrid();
   int n = 0;
   for (const auto &v : grid) {
-    int size = 1;  // same as in drawCube, maybe make into an attribute of Voxel?
+    int size = 1;
     float x = (float)v.first[0];
     float y = (float)v.first[1];
     float z = (float)v.first[2];

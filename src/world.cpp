@@ -22,26 +22,22 @@ void World::setCursorColor (vector<int> color) {
   cursor->setColor(color);
 }
 
-void World::setCursorShape (int shape) {
-  cursor->setShape(shape);
+void World::setCursorSize (int size) {
+  cursor->setSize(size);
 }
 
-void World::placeVoxel () {
-  int num_voxels = cursor->getShape();
-  Voxel **voxels = new Voxel*[num_voxels];
-  cursor->place(voxels);
-  for (int i = 0; i < num_voxels; i++) {
-    Voxel *vox = voxels[i];
+void World::placeVoxels () {
+  vector<vector<int>> coords = cursor->getCoords();
+  for (vector<int> pos : coords) {
+    Voxel *vox = new Voxel(pos, cursor->getColor());
     grid[vox->getPosition()] = vox;
   }
 }
 
-void World::eraseVoxel () {
-  int num_positions = cursor->getShape();
-  vector<int> *positions = new vector<int>[num_positions];
-  cursor->erase(positions);
-  for (int i = 0; i < num_positions; i++) {
-    grid.erase(positions[i]);
+void World::eraseVoxels () {
+  vector<vector<int>> coords = cursor->getCoords();
+  for (vector<int> pos : coords) {
+    grid.erase(pos);
   }
 }
 
