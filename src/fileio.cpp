@@ -51,11 +51,11 @@ void exportStl (World *world, string filepath) {
 
   map<vector<int>, Voxel *> grid = world->getGrid();
   int n = 0;
-  for (const auto &v : grid) {
+  for (const auto &pair : grid) {
     int size = 1;
-    float x = (float)v.first[0];
-    float y = (float)v.first[1];
-    float z = (float)v.first[2];
+    float x = static_cast<float>(pair.first[0]);
+    float y = static_cast<float>(pair.first[1]);
+    float z = static_cast<float>(pair.first[2]);
     float s = size / 2.0;
 
     vector<vector<float>> corners = getCorners(x, y, z, s);
@@ -73,5 +73,36 @@ void exportStl (World *world, string filepath) {
   fs.close();
 }
 
-void importStl (string filepath) {
+void export3dp (World *world, string filepath) {
+  ofstream fs;
+  fs.open(filepath + ".3dp");
+  if (!fs.is_open()) {
+    cout << "Error: could not open file '" << filepath << ".3dp'." << endl;
+    return;
+  }
+
+  map<vector<int>, Voxel *> grid = world->getGrid();
+  for (const auto &pair : grid) {
+    vector<int> pos = pair.second->getPosition();
+    vector<int> col = pair.second->getColor();
+    fs << pos[0] << " " << pos[1] <<  " " << pos[2] <<  " ";
+    fs << col[0] << " " << col[1] <<  " " << col[2] << endl;
+  }
+
+  fs.close();
+}
+
+World *import3dp (string filepath) {
+  ifstream fs;
+  fs.open(filepath + ".3dp");
+
+  Cursor *cursor = new Cursor();
+  map<vector<int>, Voxel *> grid;
+  int x, y, z, r, g, b;
+
+  while (fs >> x >> y >> z >> r >> g >> b) {
+    grid[{x, y, z}] = new Voxel({x, y, z}, {r, g, b});
+  }
+
+  return new World(grid, cursor, {0, 0, 0});
 }
