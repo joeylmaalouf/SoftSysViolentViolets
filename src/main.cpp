@@ -103,6 +103,12 @@ void handleInput (unsigned char key, int x, int y) {
     case 'h':
       displayUsage();
       break;
+    case '1':
+      cursor->setShape(1);
+      break;
+    case '2':
+      cursor->setShape(2);
+      break;
     case ' ':
       cout << "Please enter a filename for the exported .stl: ";
       cin >> filepath;
