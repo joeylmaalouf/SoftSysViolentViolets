@@ -32,7 +32,7 @@ void World::placeVoxels () {
   int num_added = 0;
   Voxel **added = new Voxel*[num_added];
   int num_removed = 0;
-  Voxel **removed = new Voxel*[num_added]; // num_added >= num_removed
+  Voxel **removed = new Voxel*[num_added];  // num_added >= num_removed
 
   for (vector<int> pos : coords) {
     Voxel *add = new Voxel(pos, cursor->getColor());
