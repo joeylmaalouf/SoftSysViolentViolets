@@ -28,6 +28,10 @@ void display () {
 }
 
 void handleInput (unsigned char key, int x, int y) {
+  string filepath;
+  string red_s;
+  string green_s;
+  string blue_s;
   switch (key) {
     case 'w':
       camera->rotateX(10);
@@ -57,12 +61,24 @@ void handleInput (unsigned char key, int x, int y) {
       camera->reset();
       break;
     case ' ':
-      string filepath;
       cout << "Please enter a filename for the exported .stl: ";
       cin >> filepath;
       if (filepath != "") {
         exportStl(world, filepath);
       }
+      break;
+    case 'c':
+      cout << "Please enter a red value (0-127): ";
+      cin >> red_s;
+      cout << "Please enter a green value (0-127): ";
+      cin >> green_s;
+      cout << "Please enter a blue value (0-127): ";
+      cin >> blue_s;
+      int red = stoi(red_s);
+      int green = stoi(green_s);
+      int blue = stoi(blue_s);
+      vector<int> color = {red, green, blue};
+      cursor->setColor(color);
       break;
   }
   glutPostRedisplay();
