@@ -68,9 +68,8 @@ void displayUsage () {
 
 void handleInput (unsigned char key, int x, int y) {
   string filepath;
-  string red_s;
-  string green_s;
-  string blue_s;
+  string red_s, green_s, blue_s;
+  int red, green, blue;
 
   int ctrl = glutGetModifiers() & GLUT_ACTIVE_CTRL;
   if (ctrl) {
@@ -127,11 +126,10 @@ void handleInput (unsigned char key, int x, int y) {
       cin >> green_s;
       cout << "Please enter a blue value (0-127): ";
       cin >> blue_s;
-      int red = stoi(red_s);
-      int green = stoi(green_s);
-      int blue = stoi(blue_s);
-      vector<int> color = {red, green, blue};
-      cursor->setColor(color);
+      red = stoi(red_s);
+      green = stoi(green_s);
+      blue = stoi(blue_s);
+      cursor->setColor({red, green, blue});
       break;
     case ' ':
       cout << "Please enter a filename for the exported .stl: ";
