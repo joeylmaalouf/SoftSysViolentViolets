@@ -48,6 +48,9 @@ void displayUsage () {
                 "  mouse r-click: delete\n"
                 "  -            : decrease cursor size\n"
                 "  =            : increase cursor size\n"
+          BOLD  "History:\n" UNBOLD
+                "  u: undo\n"
+                "  ctrl-u: redo\n"
           BOLD  "Camera controls:\n" UNBOLD
                 "  w/s: rotate around x-axis\n"
                 "  a/d: rotate around y-axis\n"
