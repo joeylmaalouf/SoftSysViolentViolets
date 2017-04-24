@@ -1,3 +1,5 @@
 build
 *.o
 voxelpaint
+*.stl
+*.3dp
