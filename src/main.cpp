@@ -57,9 +57,9 @@ void displayUsage () {
                 "  r  : reset\n"
           BOLD "Other controls:\n" UNBOLD
                "  c<red><green><blue>: set color with rgb values\n"
-               "  <space><path/to/file>: export current world to .stl\n" 
+               "  <space><path/to/file>: export current world to .stl\n"
                "  h: display help menu\n"
-               "  crtl-c (in terminal): exit\n";
+               "  ctrl-c (in terminal): exit\n";
 }
 
 void handleInput (unsigned char key, int x, int y) {
@@ -102,6 +102,11 @@ void handleInput (unsigned char key, int x, int y) {
       cursor->setSize(cursor->getSize() + 1);
     case 'h':
       displayUsage();
+    case 'u':
+      world->undo();
+      break;
+    case 'i':
+      world->redo();
       break;
     case ' ':
       cout << "Please enter a filename for the exported .stl: ";
@@ -123,7 +128,6 @@ void handleInput (unsigned char key, int x, int y) {
       vector<int> color = {red, green, blue};
       cursor->setColor(color);
       break;
-
   }
   glutPostRedisplay();
 }
