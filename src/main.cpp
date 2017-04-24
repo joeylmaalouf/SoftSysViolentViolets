@@ -46,6 +46,8 @@ void displayUsage () {
           BOLD  "Place voxel:\n" UNBOLD
                 "  mouse l-click: place\n"
                 "  mouse r-click: delete\n"
+                "  -            : decrease cursor size\n"
+                "  =            : increase cursor size\n"
           BOLD  "Camera controls:\n" UNBOLD
                 "  w/s: rotate around x-axis\n"
                 "  a/d: rotate around y-axis\n"
@@ -88,6 +90,11 @@ void handleInput (unsigned char key, int x, int y) {
     case 'r':
       camera->reset();
       break;
+    case '-':
+      cursor->setSize(cursor->getSize() - 1);
+      break;
+    case '=':
+      cursor->setSize(cursor->getSize() + 1);
     case 'h':
       displayUsage();
       break;
@@ -137,12 +144,12 @@ void handleMouseInput (int button, int state, int x, int y) {
   switch (button) {
     case GLUT_LEFT_BUTTON:
       if (state == GLUT_UP) {
-        world->placeVoxel();
+        world->placeVoxels();
       }
       break;
     case GLUT_RIGHT_BUTTON:
       if (state == GLUT_UP) {
-        world->eraseVoxel();
+        world->eraseVoxels();
       }
       break;
   }
