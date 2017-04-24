@@ -34,34 +34,34 @@ void display () {
 void displayUsage () {
   struct winsize w;
   ioctl(0, TIOCGWINSZ, &w);
-  int num_cols = w.ws_col;
   string center_first = string((w.ws_col - 21)/2, ' ');
   string center_second = string((w.ws_col - 24)/2, ' ');
   cout << center_first +"Welcome to Voxelpaint!\n"+
           center_second+ "Voxelpaint usage details:\n"
-          BOLD "Move cursor:\n" UNBOLD
-               "  l/r arrow keys: x-axis\n"
-               "  u/d arrow keys: y-axis\n"
+           BOLD "Move cursor:\n" UNBOLD
+                "  l/r arrow keys: x-axis\n"
+                "  u/d arrow keys: y-axis\n"
                 "  page u/d keys : z-axis\n"
-          BOLD  "Place voxel:\n" UNBOLD
+           BOLD "Place voxel:\n" UNBOLD
                 "  mouse l-click: place\n"
                 "  mouse r-click: delete\n"
                 "  -            : decrease cursor size\n"
                 "  =            : increase cursor size\n"
-          BOLD  "Camera controls:\n" UNBOLD
+           BOLD "Camera controls:\n" UNBOLD
                 "  w/s: rotate around x-axis\n"
                 "  a/d: rotate around y-axis\n"
                 "  q/e: rotate around z-axis\n"
                 "  z  : zoom in\n"
                 "  x  : zoom out\n"
                 "  r  : reset\n"
-          BOLD "Other controls:\n" UNBOLD
-               "  <space><path/to/file>: export current world to .stl\n" 
-               "  h: display help menu\n"
-               "  crtl-c (in terminal): exit\n";
+           BOLD "Other controls:\n" UNBOLD
+                "  <space><path/to/file>: export current world to .stl\n"
+                "  h: display help menu\n"
+                "  ctrl-c (in terminal): exit\n";
 }
 
 void handleInput (unsigned char key, int x, int y) {
+  string filepath;
   switch (key) {
     case 'w':
       camera->rotateX(10);
@@ -95,18 +95,32 @@ void handleInput (unsigned char key, int x, int y) {
       break;
     case '=':
       cursor->setSize(cursor->getSize() + 1);
+      break;
     case 'h':
       displayUsage();
       break;
     case ' ':
-      string filepath;
       cout << "Please enter a filename for the exported .stl: ";
       cin >> filepath;
       if (filepath != "") {
         exportStl(world, filepath);
       }
       break;
-    
+    case 'k':
+      cout << "Please enter a filename for the exported .3dp: ";
+      cin >> filepath;
+      if (filepath != "") {
+        export3dp(world, filepath);
+      }
+      break;
+    case 'l':
+      cout << "Please enter the filename of the imported .3dp: ";
+      cin >> filepath;
+      if (filepath != "") {
+        world = import3dp(filepath);
+        cursor = world->getCursor();
+      }
+      break;
   }
   glutPostRedisplay();
 }

@@ -2,9 +2,9 @@
 #include "util.h"
 
 void drawCube (vector<int> pos, vector<int> col, int size, int draw_flag) {
-  float x = (float)pos[0];
-  float y = (float)pos[1];
-  float z = (float)pos[2];
+  float x = static_cast<float>(pos[0]);
+  float y = static_cast<float>(pos[1]);
+  float z = static_cast<float>(pos[2]);
 
   glPushMatrix();
   glTranslatef(x, y, z);
