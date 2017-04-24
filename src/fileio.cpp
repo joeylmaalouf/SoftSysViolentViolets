@@ -86,7 +86,7 @@ void export3dp (World *world, string filepath) {
     vector<int> pos = pair.second->getPosition();
     vector<int> col = pair.second->getColor();
     fs << pos[0] << " " << pos[1] <<  " " << pos[2] <<  " ";
-    fs << col[0] <<  " " << col[1] <<  " " << col[2] << endl;
+    fs << col[0] << " " << col[1] <<  " " << col[2] << endl;
   }
 
   fs.close();
