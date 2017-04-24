@@ -10,6 +10,10 @@
 #include "fileio.h"
 #include "world.h"
 #include "util.h"
+#include <sys/ioctl.h>
+
+#define BOLD "\e[1m"
+#define UNBOLD "\e[0m"
 
 Camera *camera = new Camera();
 Cursor *cursor = new Cursor();
@@ -25,6 +29,34 @@ void update () {
 
 void display () {
   camera->display(world);
+}
+
+void displayUsage () {
+  struct winsize w;
+  ioctl(0, TIOCGWINSZ, &w);
+  int num_cols = w.ws_col;
+  string center_first = string((w.ws_col - 21)/2, ' ');
+  string center_second = string((w.ws_col - 24)/2, ' ');
+  cout << center_first +"Welcome to Voxelpaint!\n"+
+          center_second+ "Voxelpaint usage details:\n"
+          BOLD "Move cursor:\n" UNBOLD
+               "  l/r arrow keys: x-axis\n"
+               "  u/d arrow keys: y-axis\n"
+                "  page u/d keys : z-axis\n"
+          BOLD  "Place voxel:\n" UNBOLD
+                "  mouse l-click: place\n"
+                "  mouse r-click: delete\n"
+          BOLD  "Camera controls:\n" UNBOLD
+                "  w/s: rotate around x-axis\n"
+                "  a/d: rotate around y-axis\n"
+                "  q/e: rotate around z-axis\n"
+                "  z  : zoom in\n"
+                "  x  : zoom out\n"
+                "  r  : reset\n"
+          BOLD "Other controls:\n" UNBOLD
+               "  <space><path/to/file>: export current world to .stl\n" 
+               "  h: display help menu\n"
+               "  crtl-c (in terminal): exit\n";
 }
 
 void handleInput (unsigned char key, int x, int y) {
@@ -56,6 +88,9 @@ void handleInput (unsigned char key, int x, int y) {
     case 'r':
       camera->reset();
       break;
+    case 'h':
+      displayUsage();
+      break;
     case ' ':
       string filepath;
       cout << "Please enter a filename for the exported .stl: ";
@@ -64,6 +99,7 @@ void handleInput (unsigned char key, int x, int y) {
         exportStl(world, filepath);
       }
       break;
+    
   }
   glutPostRedisplay();
 }
@@ -146,6 +182,8 @@ int main (int argc, char *argv[]) {
   // Set up line drawing
   glEnable(GL_LINE_SMOOTH);
   glLineWidth(1.5);
+
+  displayUsage();
 
   glutMainLoop();
   return 1;
