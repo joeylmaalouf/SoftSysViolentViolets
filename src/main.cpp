@@ -56,6 +56,7 @@ void displayUsage () {
                 "  x  : zoom out\n"
                 "  r  : reset\n"
           BOLD "Other controls:\n" UNBOLD
+               "  c<red><green><blue>: set color with rgb values\n"
                "  <space><path/to/file>: export current world to .stl\n" 
                "  h: display help menu\n"
                "  crtl-c (in terminal): exit\n";
