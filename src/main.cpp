@@ -36,8 +36,8 @@ void displayUsage () {
   ioctl(0, TIOCGWINSZ, &w);
   string center_first = string((w.ws_col - 21)/2, ' ');
   string center_second = string((w.ws_col - 24)/2, ' ');
-  cout << center_first +"Welcome to Voxelpaint!\n"+
-          center_second+ "Voxelpaint usage details:\n"
+  cout << center_first  + "Welcome to Voxelpaint!\n" +
+          center_second + "Voxelpaint usage details:\n"
            BOLD "Move cursor:\n" UNBOLD
                 "  l/r arrow keys: x-axis\n"
                 "  u/d arrow keys: y-axis\n"
@@ -47,6 +47,9 @@ void displayUsage () {
                 "  mouse r-click: delete\n"
                 "  -            : decrease cursor size\n"
                 "  =            : increase cursor size\n"
+           BOLD "History:\n" UNBOLD
+                "  u: undo\n"
+                "  ctrl-u: redo\n"
            BOLD "Camera controls:\n" UNBOLD
                 "  w/s: rotate around x-axis\n"
                 "  a/d: rotate around y-axis\n"
@@ -68,6 +71,12 @@ void handleInput (unsigned char key, int x, int y) {
   string red_s;
   string green_s;
   string blue_s;
+
+  int ctrl = glutGetModifiers() & GLUT_ACTIVE_CTRL;
+  if (ctrl) {
+    key += 96;  // control key subtracts 96 from key value, for some reason (?)
+  }
+
   switch (key) {
     case 'w':
       camera->rotateX(10);
@@ -104,6 +113,12 @@ void handleInput (unsigned char key, int x, int y) {
       break;
     case 'h':
       displayUsage();
+    case 'u':
+      if (ctrl) {
+        world->redo();
+      } else {
+        world->undo();
+      }
       break;
     case 'c':
       cout << "Please enter a red value (0-127): ";

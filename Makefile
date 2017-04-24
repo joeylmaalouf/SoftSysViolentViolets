@@ -13,7 +13,7 @@ endif
 # make build directory if it doesn't exist
 dummy := $(shell mkdir -p $(BUILD_DIR))
 
-voxelpaint : $(SRC_DIR)/main.cpp $(BUILD_DIR)/camera.o $(BUILD_DIR)/cursor.o $(BUILD_DIR)/fileio.o $(BUILD_DIR)/voxel.o $(BUILD_DIR)/world.o
+voxelpaint : $(SRC_DIR)/main.cpp $(BUILD_DIR)/camera.o $(BUILD_DIR)/cursor.o $(BUILD_DIR)/fileio.o $(BUILD_DIR)/voxel.o $(BUILD_DIR)/world.o $(BUILD_DIR)/diff.o $(BUILD_DIR)/stack.o
 	$(CC) $(COMPILE_FLAGS) $^ -o $@ $(GRAPHICS_FLAGS)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(wildcard $(SRC_DIR)/%.h)
