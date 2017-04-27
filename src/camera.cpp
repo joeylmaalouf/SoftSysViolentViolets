@@ -1,14 +1,14 @@
 #include "camera.h"
 #include "util.h"
 
-void drawCube (vector<int> pos, vector<int> col, int size, int draw_flag) {
+void drawCube (vector<int> pos, vector<int> color, int size, int draw_flag) {
   float x = static_cast<float>(pos[0]);
   float y = static_cast<float>(pos[1]);
   float z = static_cast<float>(pos[2]);
 
   glPushMatrix();
   glTranslatef(x, y, z);
-  glColor4b(col[0], col[1], col[2], 127);
+  glColor4b(color[0], color[1], color[2], 127);
 
   if (draw_flag == GL_LINES) {
     glEnable(GL_BLEND);
@@ -68,14 +68,14 @@ void Camera::rotateZ (int degrees) {
     rotationZ = fmod(rotationZ + degrees, 360);
 }
 
-void Camera::zoom (double scalar) {
-    eyeX *= scalar;
-    eyeY *= scalar;
-    eyeZ *= scalar;
-}
-
 void Camera::reset () {
     rotationX = 0;
     rotationY = 0;
     rotationZ = 0;
+}
+
+void Camera::zoom (double scalar) {
+    eyeX *= scalar;
+    eyeY *= scalar;
+    eyeZ *= scalar;
 }

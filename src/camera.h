@@ -5,6 +5,13 @@
 #include "util.h"
 #include "world.h"
 
+/*
+ * Draws a cube.
+ * pos: a vector specifying the center of the cube, <x,y,z>
+ * color: a vector specifying the color of the cube, <r,g,b>
+ * size: the side length of the cube
+ * draw_flag: if GL_LINES, cube will be wireframe; otherwise, cube will be solid
+ */
 void drawCube (vector<int> pos, vector<int> col, int draw_flag);
 
 class Camera {
@@ -40,12 +47,30 @@ class Camera {
     double rotationZ = 0;
 
   public:
+    /*
+     * Displays the world.
+     * world: a pointer to the world to display
+     */
     void display (World *world);
+
+    /*
+     * Sets camera rotation around each axis.
+     * degrees: the number of degrees to rotate the camera, counterclockwise
+     */
     void rotateX (int degrees);
     void rotateY (int degrees);
     void rotateZ (int degrees);
-    void zoom (double scalar);
+
+    /*
+     * Resets camera rotation.
+     */
     void reset ();
+
+    /*
+     * Sets camera zoom.
+     * scalar: the zoom multiplier. scalar > 1 zooms out; scalar < 1 zooms in.
+     */
+    void zoom (double scalar);
 };
 
 #endif /* CAMERA_H */
