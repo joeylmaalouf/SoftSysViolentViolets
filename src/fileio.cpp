@@ -16,25 +16,34 @@ vector<vector<float>> getCorners (float x, float y, float z, float s) {
   };
 }
 
-vector<vector<vector<float>>> getTriangles (vector<vector<float>> corners) {
+vector<vector<vector<float>>> getTrianglesAndNormal (vector<vector<float>> corners) {
   return {
-    {corners[0], corners[1], corners[2]}, {corners[1], corners[2], corners[3]},
-    {corners[0], corners[1], corners[4]}, {corners[1], corners[4], corners[5]},
-    {corners[0], corners[2], corners[4]}, {corners[2], corners[4], corners[6]},
-    {corners[2], corners[3], corners[6]}, {corners[3], corners[6], corners[7]},
-    {corners[4], corners[5], corners[6]}, {corners[5], corners[6], corners[7]},
-    {corners[1], corners[3], corners[5]}, {corners[3], corners[5], corners[7]}
+    {corners[0], corners[1], corners[2], {-1.0,  0.0,  0.0}},
+    {corners[2], corners[1], corners[3], {-1.0,  0.0,  0.0}},
+    {corners[1], corners[0], corners[4], { 0.0, -1.0,  0.0}},
+    {corners[1], corners[4], corners[5], { 0.0, -1.0,  0.0}},
+    {corners[0], corners[2], corners[4], { 0.0,  0.0, -1.0}},
+    {corners[4], corners[2], corners[6], { 0.0,  0.0, -1.0}},
+    {corners[2], corners[3], corners[6], { 0.0,  1.0,  0.0}},
+    {corners[6], corners[3], corners[7], { 0.0,  1.0,  0.0}},
+    {corners[5], corners[4], corners[6], { 1.0,  0.0,  0.0}},
+    {corners[5], corners[6], corners[7], { 1.0,  0.0,  0.0}},
+    {corners[3], corners[1], corners[5], { 0.0,  0.0,  1.0}},
+    {corners[3], corners[5], corners[7], { 0.0,  0.0,  1.0}}
   };
 }
 
-string buildFacetString (int n, vector<vector<float>> triangle) {
+string buildFacetString (vector<vector<float>> triangle) {
   stringstream s;
-  s << "facet normal 0.0e1 0.0e1 " << n << ".0e1" << endl << "    outer loop" << endl;
+  vector<float> normal = triangle[3];
+  s << "  facet normal " << normal[0] << "E+0 " << normal[1] << "E+0 " << normal[2] << "E+0" << endl;
+  s << "    outer loop" << endl;
   for (int i = 0; i < 3; i++) {
     vector<float> point = triangle[i];
-    s << "        vertex " << point[0] << "e1 " << point[1] << "e1 " << point[2] << "e1" << endl;
+    s << "      vertex " << point[0] << "E+0 " << point[1] << "E+0 " << point[2] << "E+0" << endl;
   }
-  s << "    endloop" << endl << "endfacet" << endl;
+  s << "    endloop" << endl;
+  s << "  endfacet" << endl;
   return s.str();
 }
 
@@ -46,11 +55,9 @@ void exportStl (World *world, string filepath) {
     return;
   }
 
-  // https://en.wikipedia.org/wiki/STL_(file_format)#ASCII_STL
   fs << "solid " << filepath << endl;
 
   map<vector<int>, Voxel *> grid = world->getGrid();
-  int n = 0;
   for (const auto &pair : grid) {
     int size = 1;
     float x = static_cast<float>(pair.first[0]);
@@ -59,12 +66,9 @@ void exportStl (World *world, string filepath) {
     float s = size / 2.0;
 
     vector<vector<float>> corners = getCorners(x, y, z, s);
-
-    vector<vector<vector<float>>> triangles = getTriangles(corners);
-
+    vector<vector<vector<float>>> triangles = getTrianglesAndNormal(corners);
     for (vector<vector<float>> t : triangles) {
-      fs << buildFacetString(n, t);
-      n++;
+      fs << buildFacetString(t);
     }
   }
 
