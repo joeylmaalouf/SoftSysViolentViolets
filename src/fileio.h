@@ -5,7 +5,7 @@
 #include "world.h"
 
 vector<vector<float>> getCorners (float x, float y, float z, float s);
-vector<vector<vector<float>>> getTrianglesAndNormal (vector<vector<float>> corners);
+vector<vector<vector<float>>> getTrianglesAndNormals (vector<vector<float>> corners);
 string buildFacetString (vector<vector<float>> triangle);
 void exportStl (World *world, string filepath);
 void export3dp (World *world, string filepath);

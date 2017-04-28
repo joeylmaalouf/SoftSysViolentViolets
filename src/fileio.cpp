@@ -16,7 +16,7 @@ vector<vector<float>> getCorners (float x, float y, float z, float s) {
   };
 }
 
-vector<vector<vector<float>>> getTrianglesAndNormal (vector<vector<float>> corners) {
+vector<vector<vector<float>>> getTrianglesAndNormals (vector<vector<float>> corners) {
   return {
     {corners[0], corners[1], corners[2], {-1.0,  0.0,  0.0}},
     {corners[2], corners[1], corners[3], {-1.0,  0.0,  0.0}},
@@ -66,7 +66,7 @@ void exportStl (World *world, string filepath) {
     float s = size / 2.0;
 
     vector<vector<float>> corners = getCorners(x, y, z, s);
-    vector<vector<vector<float>>> triangles = getTrianglesAndNormal(corners);
+    vector<vector<vector<float>>> triangles = getTrianglesAndNormals(corners);
     for (vector<vector<float>> t : triangles) {
       fs << buildFacetString(t);
     }
