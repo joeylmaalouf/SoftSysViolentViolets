@@ -5,9 +5,9 @@ BUILD_DIR = ./build
 OS := $(shell uname)
 ifeq ($(OS), Darwin)
   # MAC
-  GRAPHICS_FLAGS = -framework OpenGL -framework GLUT
+  GRAPHICS_FLAGS = -lSOIL -framework OpenGL -framework GLUT -framework CoreFoundation
 else
-  GRAPHICS_FLAGS = -lglut -lGL -lGLU
+  GRAPHICS_FLAGS = -lglut -lGL -lGLU -lSOIL
 endif
 
 # make build directory if it doesn't exist
