@@ -14,6 +14,9 @@
  */
 void drawCube (vector<int> pos, vector<int> col, int draw_flag);
 
+/*
+ * Represents a camera.
+ */
 class Camera {
   private:
     // for gluPerspective:

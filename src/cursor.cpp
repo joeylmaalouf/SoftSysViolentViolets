@@ -1,13 +1,7 @@
 #include "cursor.h"
 
-Cursor::Cursor () {
-  radius = 1;
-  color = {0, 96, 0};
-  position = {0, 0, 0};
-}
-
 int Cursor::getSize () {
-  return radius;
+  return size;
 }
 
 vector<int> Cursor::getColor () {
@@ -21,11 +15,11 @@ vector<int> Cursor::getPosition () {
 vector<vector<int>> Cursor::getCoords () {
   vector<vector<int>> list;
   vector<int> current = {0, 0, 0};
-  for (int x = -1 * (radius - 1); x < radius; x++) {
+  for (int x = -1 * (size - 1); x < size; x++) {
     current[0] = position[0] + x;
-    for (int y = -1 * (radius - 1); y < radius; y++) {
+    for (int y = -1 * (size - 1); y < size; y++) {
       current[1] = position[1] + y;
-      for (int z = -1 * (radius - 1); z < radius; z++) {
+      for (int z = -1 * (size - 1); z < size; z++) {
         current[2] = position[2] + z;
         list.push_back(current);
       }
@@ -35,7 +29,7 @@ vector<vector<int>> Cursor::getCoords () {
 }
 
 void Cursor::setSize (int size) {
-  radius = max(size, 1);
+  size = max(size, 1);
 }
 
 void Cursor::setColor (vector<int> newColor) {

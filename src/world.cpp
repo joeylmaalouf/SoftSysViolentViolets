@@ -1,7 +1,6 @@
 #include "world.h"
 
 World::World (map<vector<int>, Voxel *> g, Cursor *c, vector<int> color) {
-  grid = g;
   cursor = c;
   backgroundColor = color;
 }
@@ -14,8 +13,8 @@ Cursor *World::getCursor () {
   return cursor;
 }
 
-void World::moveCursor (vector<int> position) {
-  cursor->move(position);
+void World::moveCursor (vector<int> delta) {
+  cursor->move(delta);
 }
 
 void World::setCursorColor (vector<int> color) {
