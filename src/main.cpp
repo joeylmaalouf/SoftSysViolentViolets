@@ -204,7 +204,9 @@ void handleMouseInput (int button, int state, int x, int y) {
 
 int main (int argc, char *argv[]) {
   glutInit(&argc, argv);
-  glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
+
+  glutInitDisplayMode(GLUT_3_2_CORE_PROFILE | GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
+  //glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
   glutInitWindowSize(640, 480);
   glutCreateWindow("voxelpaint");
 
