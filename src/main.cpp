@@ -1,16 +1,11 @@
-#ifdef __APPLE__
-#include <GLUT/glut.h>
-#else
-#include <GL/glut.h>
-#endif
-
 #include <iostream>
+#include <sys/ioctl.h>
+
 #include "camera.h"
 #include "cursor.h"
 #include "fileio.h"
-#include "world.h"
 #include "util.h"
-#include <sys/ioctl.h>
+#include "world.h"
 
 #define BOLD "\e[1m"
 #define UNBOLD "\e[0m"

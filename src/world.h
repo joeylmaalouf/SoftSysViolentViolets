@@ -7,6 +7,9 @@
 #include "stack.h"
 #include "diff.h"
 
+/*
+ * Represents the world.
+ */
 class World {
   private:
     map<vector<int>, Voxel *> grid;

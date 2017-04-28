@@ -4,6 +4,9 @@
 #include "util.h"
 #include "voxel.h"
 
+/*
+ * Represents the cursor used for adding to and removing from the world.
+ */
 class Cursor {
   private:
     int size = 1; // size of the cursor
