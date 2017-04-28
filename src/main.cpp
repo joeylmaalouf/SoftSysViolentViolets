@@ -68,12 +68,12 @@ void displayUsage () {
                 "  x  : zoom out\n"
                 "  r  : reset\n"
            BOLD "Other controls:\n" UNBOLD
-                "  c<red><green><blue>: set color with rgb values\n"
-                "  k<path/to/file>: export current world to .3dp\n"
-                "  l<path/to/file>: load existing world from .3dp\n"
+                "  c<red><green><blue>  : set color with rgb values\n"
+                "  k<path/to/file>      : export current world to .3dp\n"
+                "  l<path/to/file>      : load existing world from .3dp\n"
                 "  <space><path/to/file>: export current world to .stl\n"
-                "  h: display help menu\n"
-                "  ctrl-c (in terminal): exit\n";
+                "  h                    : display help menu\n"
+                "  ctrl-c (in terminal) : exit\n";
 }
 
 /*

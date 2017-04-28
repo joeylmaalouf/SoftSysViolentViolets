@@ -15,19 +15,18 @@ vector<vector<float>> getCorners (float x, float y, float z, float s);
 /*
  * Computes triangular face representations for a cube.
  * corners: a vector of the <x,y,z> corners of the cube.
- * return: a vector of <vertex1,vertex2,vertex3> triangle vertices, where
+ * return: a vector of <vertex1,vertex2,vertex3,normal> triangle vertices, where
  *         each vertex is a <x,y,z> position vector.
  */
-vector<vector<vector<float>>> getTriangles (vector<vector<float>> corners);
+vector<vector<vector<float>>> getTrianglesAndNormals (vector<vector<float>> corners);
 
 /*
  * Builds an STL string representing a facet.
- * n: an identifying number
  * triangle: a vector of <vertex1,vertex2,vertex3> triangle vertices, where
  *           each vertex is a <x,y,z> position vector.
  * return: an STL string
  */
-string buildFacetString (int n, vector<vector<float>> triangle);
+string buildFacetString (vector<vector<float>> triangle);
 
 /*
  * Exports a world to STL.
