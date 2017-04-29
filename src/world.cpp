@@ -1,6 +1,7 @@
 #include "world.h"
 
 World::World (map<vector<int>, Voxel *> g, Cursor *c, vector<int> color) {
+  grid = g;
   cursor = c;
   backgroundColor = color;
 }
