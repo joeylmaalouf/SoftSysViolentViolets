@@ -30,7 +30,7 @@ We have used Voxelpaint to model a logo, exported it to STL, and 3D-printed it u
 
 We also modeled the Olin O, for fun.
 
-![Olin O Model](./reports/olin_o_model.png)
+![Olin O Model](./reports/olin-o-model.png)
 
 
 ### Annotated Bibliography
