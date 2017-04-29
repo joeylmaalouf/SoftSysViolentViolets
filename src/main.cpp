@@ -53,10 +53,10 @@ void displayUsage () {
                 "  u/d arrow keys: y-axis\n"
                 "  page u/d keys : z-axis\n"
            BOLD "Place voxel:\n" UNBOLD
-                "  mouse l-click: place\n"
-                "  mouse r-click: delete\n"
-                "  -            : decrease cursor size\n"
-                "  =            : increase cursor size\n"
+                "  <space> : place\n"
+                "  <delete>: delete\n"
+                "  -       : decrease cursor size\n"
+                "  =       : increase cursor size\n"
            BOLD "History:\n" UNBOLD
                 "  u: undo\n"
                 "  ctrl-u: redo\n"
@@ -68,12 +68,12 @@ void displayUsage () {
                 "  x  : zoom out\n"
                 "  r  : reset\n"
            BOLD "Other controls:\n" UNBOLD
-                "  c<red><green><blue>  : set color with rgb values\n"
-                "  k<path/to/file>      : export current world to .3dp\n"
-                "  l<path/to/file>      : load existing world from .3dp\n"
-                "  <space><path/to/file>: export current world to .stl\n"
-                "  h                    : display help menu\n"
-                "  ctrl-c (in terminal) : exit\n";
+                "  c<red><green><blue>: set color with rgb values\n"
+                "  k<path/to/file>    : export current world to .3dp\n"
+                "  l<path/to/file>    : load existing world from .3dp\n"
+                "  f<path/to/file>    : export current world to .stl\n"
+                "  h                  : display help menu\n"
+                "  ctrl-c             : exit\n";
 }
 
 /*
@@ -83,7 +83,6 @@ void handleInput (unsigned char key, int x, int y) {
   string filepath;
   string red_s, green_s, blue_s;
   int red, green, blue;
-
   int ctrl = glutGetModifiers() & GLUT_ACTIVE_CTRL;
   if (ctrl) {
     key += 96;  // control key subtracts 96 from key value, for some reason (?)
@@ -133,18 +132,33 @@ void handleInput (unsigned char key, int x, int y) {
       }
       break;
     case 'c':
-      cout << "Please enter a red value (0-127): ";
-      cin >> red_s;
-      cout << "Please enter a green value (0-127): ";
-      cin >> green_s;
-      cout << "Please enter a blue value (0-127): ";
-      cin >> blue_s;
-      red = stoi(red_s);
-      green = stoi(green_s);
-      blue = stoi(blue_s);
-      cursor->setColor({red, green, blue});
-      break;
+      if (ctrl) {
+          exit(0);
+      } else {
+        cout << "Please enter a red value (0-127): ";
+        cin >> red_s;
+        cout << "Please enter a green value (0-127): ";
+        cin >> green_s;
+        cout << "Please enter a blue value (0-127): ";
+        cin >> blue_s;
+        red = stoi(red_s);
+        green = stoi(green_s);
+        blue = stoi(blue_s);
+        cursor->setColor({red, green, blue});
+      }
+        break;
     case ' ':
+      world->placeVoxels();
+      break;
+    case 8:
+      // backspace
+      world->eraseVoxels();
+      break;
+    case 127:
+      // delete
+      world->eraseVoxels();
+      break;
+    case 'f':
       cout << "Please enter a filename for the exported .stl: ";
       cin >> filepath;
       if (filepath != "") {
@@ -201,25 +215,6 @@ void handleSpecialInput (int key, int x, int y) {
   glutPostRedisplay();
 }
 
-/*
- * Handles mouse input -- called by glutMouseFunc.
- */
-void handleMouseInput (int button, int state, int x, int y) {
-  switch (button) {
-    case GLUT_LEFT_BUTTON:
-      if (state == GLUT_UP) {
-        world->placeVoxels();
-      }
-      break;
-    case GLUT_RIGHT_BUTTON:
-      if (state == GLUT_UP) {
-        world->eraseVoxels();
-      }
-      break;
-  }
-  glutPostRedisplay();
-}
-
 int main (int argc, char *argv[]) {
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
@@ -231,7 +226,6 @@ int main (int argc, char *argv[]) {
   glutDisplayFunc(display);
   glutKeyboardFunc(handleInput);
   glutSpecialFunc(handleSpecialInput);
-  glutMouseFunc(handleMouseInput);
 
   // Set up material
   glShadeModel(GL_SMOOTH);
