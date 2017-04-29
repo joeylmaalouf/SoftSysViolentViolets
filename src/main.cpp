@@ -68,7 +68,8 @@ void displayUsage () {
                 "  x  : zoom out\n"
                 "  r  : reset\n"
            BOLD "Other controls:\n" UNBOLD
-                "  c<red><green><blue>: set color with rgb values\n"
+                "  c<red><green><blue>: set color with RGB values\n"
+                "  b<red><green><blue>: set background color with RGB values"
                 "  k<path/to/file>    : export current world to .3dp\n"
                 "  l<path/to/file>    : load existing world from .3dp\n"
                 "  f<path/to/file>    : export current world to .stl\n"
@@ -157,6 +158,18 @@ void handleInput (unsigned char key, int x, int y) {
     case 127:
       // delete
       world->eraseVoxels();
+      break;
+    case 'b':
+      cout << "Change background color:\nPlease enter a red value (0-127): ";
+      cin >> red_s;
+      cout << "Please enter a green value (0-127): ";
+      cin >> green_s;
+      cout << "Please enter a blue value (0-127): ";
+      cin >> blue_s;
+      red = stoi(red_s);
+      green = stoi(green_s);
+      blue = stoi(blue_s);
+      world->setBackgroundColor({red, green, blue});
       break;
     case 'f':
       cout << "Please enter a filename for the exported .stl: ";

@@ -62,6 +62,7 @@ void World::eraseVoxels () {
 
 void World::setBackgroundColor (vector<int> color) {
   backgroundColor = color;
+  glClearColor(color[0], color[1], color[2], 1.0f);
 }
 
 void World::undo () {
