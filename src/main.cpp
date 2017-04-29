@@ -13,7 +13,7 @@
 Camera *camera = new Camera();
 Cursor *cursor = new Cursor();
 map<vector<int>, Voxel *> grid;
-World *world = new World(grid, cursor, {0, 0, 0});
+World *world = new World(grid, cursor, {0.0, 0.0, 0.0});
 
 // Materials
 // OpenGL uses the Phong model https://en.wikipedia.org/wiki/Phong_reflection_model
@@ -84,6 +84,7 @@ void handleInput (unsigned char key, int x, int y) {
   string filepath;
   string red_s, green_s, blue_s;
   int red, green, blue;
+  float redF, greenF, blueF;
   int ctrl = glutGetModifiers() & GLUT_ACTIVE_CTRL;
   if (ctrl) {
     key += 96;  // control key subtracts 96 from key value, for some reason (?)
@@ -136,11 +137,11 @@ void handleInput (unsigned char key, int x, int y) {
       if (ctrl) {
           exit(0);
       } else {
-        cout << "Please enter a red value (0-127): ";
+        cout << "Please enter a red value (0-255): ";
         cin >> red_s;
-        cout << "Please enter a green value (0-127): ";
+        cout << "Please enter a green value (0-255): ";
         cin >> green_s;
-        cout << "Please enter a blue value (0-127): ";
+        cout << "Please enter a blue value (0-255): ";
         cin >> blue_s;
         red = stoi(red_s);
         green = stoi(green_s);
@@ -160,16 +161,16 @@ void handleInput (unsigned char key, int x, int y) {
       world->eraseVoxels();
       break;
     case 'b':
-      cout << "Change background color:\nPlease enter a red value (0-127): ";
+      cout << "Change background color:\nPlease enter a red value (0-255): ";
       cin >> red_s;
-      cout << "Please enter a green value (0-127): ";
+      cout << "Please enter a green value (0-255): ";
       cin >> green_s;
-      cout << "Please enter a blue value (0-127): ";
+      cout << "Please enter a blue value (0-255): ";
       cin >> blue_s;
-      red = stoi(red_s);
-      green = stoi(green_s);
-      blue = stoi(blue_s);
-      world->setBackgroundColor({red, green, blue});
+      redF = float(stoi(red_s)) / 255.0;
+      greenF = float(stoi(green_s)) / 255.0;
+      blueF = float(stoi(blue_s)) / 255.0;
+      world->setBackgroundColor({redF, greenF, blueF});
       break;
     case 'f':
       cout << "Please enter a filename for the exported .stl: ";

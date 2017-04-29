@@ -1,6 +1,6 @@
 #include "world.h"
 
-World::World (map<vector<int>, Voxel *> g, Cursor *c, vector<int> color) {
+World::World (map<vector<int>, Voxel *> g, Cursor *c, vector<float> color) {
   cursor = c;
   backgroundColor = color;
 }
@@ -60,7 +60,7 @@ void World::eraseVoxels () {
   }
 }
 
-void World::setBackgroundColor (vector<int> color) {
+void World::setBackgroundColor (vector<float> color) {
   backgroundColor = color;
   glClearColor(color[0], color[1], color[2], 1.0f);
 }
