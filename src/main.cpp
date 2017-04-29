@@ -1,16 +1,11 @@
-#ifdef __APPLE__
-#include <GLUT/glut.h>
-#else
-#include <GL/glut.h>
-#endif
-
 #include <iostream>
+#include <sys/ioctl.h>
+
 #include "camera.h"
 #include "cursor.h"
 #include "fileio.h"
-#include "world.h"
 #include "util.h"
-#include <sys/ioctl.h>
+#include "world.h"
 
 #define BOLD "\e[1m"
 #define UNBOLD "\e[0m"
@@ -19,18 +14,33 @@ Camera *camera = new Camera();
 Cursor *cursor = new Cursor();
 map<vector<int>, Voxel *> grid;
 World *world = new World(grid, cursor, {0, 0, 0});
+
+// Materials
+// OpenGL uses the Phong model https://en.wikipedia.org/wiki/Phong_reflection_model
 GLfloat mat_specular[] = {1.0, 1.0, 1.0, 1.0};
 GLfloat mat_shininess[] = {50.0};
+
+// The position of the light in the scene
 GLfloat light_position[] = {1.0, 1.0, 1.0, 0.0};
 
+/*
+ * Idle function -- called by glutIdleFunc.
+ */
 void update () {
   glutPostRedisplay();
 }
 
+
+/*
+ * Display function -- called by glutDisplayFunc.
+ */
 void display () {
   camera->display(world);
 }
 
+/*
+ * Prints the help string.
+ */
 void displayUsage () {
   struct winsize w;
   ioctl(0, TIOCGWINSZ, &w);
@@ -66,6 +76,9 @@ void displayUsage () {
                 "  ctrl-c (in terminal) : exit\n";
 }
 
+/*
+ * Standard key input handler -- called by glutKeyboardFunc.
+ */
 void handleInput (unsigned char key, int x, int y) {
   string filepath;
   string red_s, green_s, blue_s;
@@ -157,7 +170,9 @@ void handleInput (unsigned char key, int x, int y) {
   glutPostRedisplay();
 }
 
-
+/*
+ * Special key input handler -- called by glutSpecialFunc.
+ */
 void handleSpecialInput (int key, int x, int y) {
   int dx = 0;
   int dy = 0;
@@ -186,6 +201,9 @@ void handleSpecialInput (int key, int x, int y) {
   glutPostRedisplay();
 }
 
+/*
+ * Handles mouse input -- called by glutMouseFunc.
+ */
 void handleMouseInput (int button, int state, int x, int y) {
   switch (button) {
     case GLUT_LEFT_BUTTON:

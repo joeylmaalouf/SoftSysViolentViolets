@@ -2,7 +2,7 @@
 
 Voxel::Voxel (vector<int> p, vector<int> c) {
   pos = p;
-  col = c;
+  color = c;
 }
 
 vector<int> Voxel::getPosition () {
@@ -10,5 +10,5 @@ vector<int> Voxel::getPosition () {
 }
 
 vector<int> Voxel::getColor () {
-  return col;
+  return color;
 }
