@@ -20,8 +20,6 @@ Additionally, Voxelpaint has undo (“u”) and redo (ctrl + “u”) capability
 
 ### Results
 
-Provide evidence demonstrating that what you built works. Though the details will be different for each project, screenshots and video are likely helpful. Include graphs or other data if appropriate.
-
 We have used Voxelpaint to model a logo, exported it to STL, and 3D-printed it using one of the printers in the library.
 
 ![Voxelpaint Model](./reports/voxelpaint_model.png)
