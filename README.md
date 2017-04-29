@@ -6,6 +6,7 @@ See [the project website](https://joeylmaalouf.github.io/SoftSysViolentViolets) 
 ![Voxelpaint model](./reports/voxelpaint_model.png)
 
 ### Dependencies
+#### Ubuntu
 - [cpplint](https://pypi.python.org/pypi/cpplint)
 - g++
 - build-essential
@@ -13,7 +14,11 @@ See [the project website](https://joeylmaalouf.github.io/SoftSysViolentViolets) 
 
 For a complete install on ubuntu, run: `pip install cpplint && sudo apt-get install -y g++ build-essential freeglut3-dev`
 
-To install on Mac, run `pip install cpplint`
+#### Mac
+ - [cpplint](https://pypi.python.org/pypi/cpplint)
+ - XCode command line tools (and XCode application)
+
+To install on Mac, install XCODE from the App Store and then run `xcode-select --install && pip install cpplint`
 
 ### Usage
 Running `make && ./voxelpaint` starts Voxelpaint. Type `h` for the help page to display the commands:
