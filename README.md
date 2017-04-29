@@ -1,6 +1,6 @@
 # Voxelpaint
 Voxelpaint is a three-dimensional version of Microsoft Paint built using C++ and OpenGL.
-Authors: @joeylmaalouf, @jovanduy, @jsutker, @sarahwalters
+Authors: [@joeylmaalouf](http://github.com/joeylmaalouf), [@jovanduy](http://github.com/jovanduy), [@jsutker](http://github.com/jsutker), [@sarahwalters](http://github.com/sarahwalters)
 See [the project website](https://joeylmaalouf.github.io/SoftSysViolentViolets) for more detail.
 
 ![Voxelpaint model](./reports/voxelpaint_model.png)
