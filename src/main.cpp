@@ -124,6 +124,7 @@ void handleInput (unsigned char key, int x, int y) {
       break;
     case 'h':
       displayUsage();
+      break;
     case 'u':
       if (ctrl) {
         world->redo();
@@ -146,7 +147,7 @@ void handleInput (unsigned char key, int x, int y) {
         blue = stoi(blue_s);
         cursor->setColor({red, green, blue});
       }
-        break;
+      break;
     case ' ':
       world->placeVoxels();
       break;

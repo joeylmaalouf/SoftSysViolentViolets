@@ -28,8 +28,8 @@ vector<vector<int>> Cursor::getCoords () {
   return list;
 }
 
-void Cursor::setSize (int size) {
-  size = max(size, 1);
+void Cursor::setSize (int newSize) {
+  size = max(newSize, 1);
 }
 
 void Cursor::setColor (vector<int> newColor) {
