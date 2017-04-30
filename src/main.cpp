@@ -137,7 +137,7 @@ void handleInput (unsigned char key, int x, int y) {
       if (ctrl) {
           exit(0);
       } else {
-        cout << "Please enter a red value (0-255): ";
+        cout << "Change cursor color:\nPlease enter a red value (0-255): ";
         cin >> red_s;
         cout << "Please enter a green value (0-255): ";
         cin >> green_s;
@@ -171,6 +171,7 @@ void handleInput (unsigned char key, int x, int y) {
       greenF = float(stoi(green_s)) / 255.0;
       blueF = float(stoi(blue_s)) / 255.0;
       world->setBackgroundColor({redF, greenF, blueF});
+      glClearColor(redF, greenF, blueF, 1.0f);
       break;
     case 'f':
       cout << "Please enter a filename for the exported .stl: ";
