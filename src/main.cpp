@@ -117,10 +117,10 @@ void handleInput (unsigned char key, int x, int y) {
       camera->reset();
       break;
     case '-':
-      cursor->setSize(cursor->getSize() - 1);
+      world->setCursorSize(world->getCursor()->getSize() - 1);
       break;
     case '=':
-      cursor->setSize(cursor->getSize() + 1);
+      cursor->setSize(world->getCursor()->getSize() + 1);
       break;
     case 'h':
       displayUsage();
@@ -145,7 +145,7 @@ void handleInput (unsigned char key, int x, int y) {
         red = stoi(red_s);
         green = stoi(green_s);
         blue = stoi(blue_s);
-        cursor->setColor({red, green, blue});
+        world->setCursorColor({red, green, blue});
       }
       break;
     case ' ':
@@ -212,7 +212,7 @@ void handleSpecialInput (int key, int x, int y) {
       dz = 1;
       break;
   }
-  cursor->move({dx, dy, dz});
+  world->moveCursor({dx, dy, dz});
   glutPostRedisplay();
 }
 
