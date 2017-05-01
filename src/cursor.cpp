@@ -45,7 +45,7 @@ void Cursor::setSize (int size) {
 }
 
 void Cursor::setShape (int shape_num) {
-  if ((shape_num >= 1) && (shape_num <= 2)) {
+  if ((shape_num >= 0) && (shape_num <= 1)) {
     shape = shape_num;
   }
 }
