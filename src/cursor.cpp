@@ -41,7 +41,7 @@ vector<vector<int>> Cursor::getCoords () {
 }
 
 void Cursor::setSize (int size) {
-  size = max(size, 1);
+  radius = max(size, 1);
 }
 
 void Cursor::setShape (int shape_num) {
