@@ -1,7 +1,7 @@
 #include "cursor.h"
 
 int Cursor::getSize () {
-  return size;
+  return radius;
 }
 
 int Cursor::getShape () {
@@ -22,9 +22,9 @@ vector<vector<int>> Cursor::getCoords () {
   long dist2;
   for (int x = -1 * (radius - 1); x < radius; x++) {
     current[0] = position[0] + x;
-    for (int y = -1 * (size - 1); y < size; y++) {
+    for (int y = -1 * (radius - 1); y < radius; y++) {
       current[1] = position[1] + y;
-      for (int z = -1 * (size - 1); z < size; z++) {
+      for (int z = -1 * (radius - 1); z < radius; z++) {
         current[2] = position[2] + z;
         if (shape == 0){
           dist2 = (x*x) + (y*y) + (z*z);
@@ -46,7 +46,7 @@ void Cursor::setSize (int size) {
 
 void Cursor::setShape (int shape_num) {
   if ((shape_num >= 1) && (shape_num <= 2)) {
-    shape = shape_num - 1;
+    shape = shape_num;
   }
 }
 
