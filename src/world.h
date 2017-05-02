@@ -14,7 +14,7 @@ class World {
   private:
     map<vector<int>, Voxel *> grid;
     Cursor *cursor;
-    vector<int> backgroundColor;
+    vector<float> backgroundColor;
     Stack<Diff *> undos; // diffs that can be undone (moves and redos)
     Stack<Diff *> redos; // diffs that can be redone (undos)
 
@@ -25,7 +25,7 @@ class World {
      * c: a pointer to the cursor
      * color: an <r,g,b>
      */
-    World (map<vector<int>, Voxel *> g, Cursor *c, vector<int> color);
+    World (map<vector<int>, Voxel *> g, Cursor *c, vector<float> color);
 
     /*
      * Getters for the cursor and the grid.
@@ -59,7 +59,7 @@ class World {
      * Sets the background color of the world.
      * color: an <r,g,b> vector
      */
-    void setBackgroundColor (vector<int> color);
+    void setBackgroundColor (vector<float> color);
 
     /*
      * Undoes the last move or redo.

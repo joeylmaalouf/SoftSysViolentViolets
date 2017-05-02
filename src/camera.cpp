@@ -8,7 +8,7 @@ void drawCube (vector<int> pos, vector<int> color, int size, int draw_flag) {
 
   glPushMatrix();
   glTranslatef(x, y, z);
-  glColor4b(color[0], color[1], color[2], 127);
+  glColor4ub(color[0], color[1], color[2], 255);
 
   if (draw_flag == GL_LINES) {
     glEnable(GL_BLEND);

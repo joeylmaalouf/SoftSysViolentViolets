@@ -108,5 +108,5 @@ World *import3dp (string filepath) {
     grid[{x, y, z}] = new Voxel({x, y, z}, {r, g, b});
   }
 
-  return new World(grid, cursor, {0, 0, 0});
+  return new World(grid, cursor, {0.0, 0.0, 0.0});
 }
