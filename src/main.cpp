@@ -57,6 +57,9 @@ void displayUsage () {
                 "  <delete>: delete\n"
                 "  -       : decrease cursor size\n"
                 "  =       : increase cursor size\n"
+           BOLD "Shapes:\n" UNBOLD
+                "  1: sphere\n"
+                "  2: cube\n"
            BOLD "History:\n" UNBOLD
                 "  u: undo\n"
                 "  ctrl-u: redo\n"
@@ -126,6 +129,12 @@ void handleInput (unsigned char key, int x, int y) {
       break;
     case 'h':
       displayUsage();
+      break;
+    case '1':
+      cursor->setShape(0);
+      break;
+    case '2':
+      cursor->setShape(1);
       break;
     case 'u':
       if (ctrl) {
