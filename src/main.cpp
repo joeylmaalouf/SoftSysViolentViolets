@@ -72,7 +72,7 @@ void displayUsage () {
                 "  r  : reset\n"
            BOLD "Other controls:\n" UNBOLD
                 "  c<red><green><blue>: set color with RGB values\n"
-                "  b<red><green><blue>: set background color with RGB values"
+                "  b<red><green><blue>: set background color with RGB values\n"
                 "  k<path/to/file>    : export current world to .3dp\n"
                 "  l<path/to/file>    : load existing world from .3dp\n"
                 "  f<path/to/file>    : export current world to .stl\n"
