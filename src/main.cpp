@@ -13,7 +13,7 @@
 Camera *camera = new Camera();
 Cursor *cursor = new Cursor();
 map<vector<int>, Voxel *> grid;
-World *world = new World(grid, cursor, {0, 0, 0});
+World *world = new World(grid, cursor, {0.0, 0.0, 0.0});
 
 // Materials
 // OpenGL uses the Phong model https://en.wikipedia.org/wiki/Phong_reflection_model
@@ -71,7 +71,8 @@ void displayUsage () {
                 "  x  : zoom out\n"
                 "  r  : reset\n"
            BOLD "Other controls:\n" UNBOLD
-                "  c<red><green><blue>: set color with rgb values\n"
+                "  c<red><green><blue>: set color with RGB values\n"
+                "  b<red><green><blue>: set background color with RGB values"
                 "  k<path/to/file>    : export current world to .3dp\n"
                 "  l<path/to/file>    : load existing world from .3dp\n"
                 "  f<path/to/file>    : export current world to .stl\n"
@@ -86,6 +87,7 @@ void handleInput (unsigned char key, int x, int y) {
   string filepath;
   string red_s, green_s, blue_s;
   int red, green, blue;
+  float redF, greenF, blueF;
   int ctrl = glutGetModifiers() & GLUT_ACTIVE_CTRL;
   if (ctrl) {
     key += 96;  // control key subtracts 96 from key value, for some reason (?)
@@ -120,10 +122,10 @@ void handleInput (unsigned char key, int x, int y) {
       camera->reset();
       break;
     case '-':
-      cursor->setSize(cursor->getSize() - 1);
+      world->setCursorSize(world->getCursor()->getSize() - 1);
       break;
     case '=':
-      cursor->setSize(cursor->getSize() + 1);
+      cursor->setSize(world->getCursor()->getSize() + 1);
       break;
     case 'h':
       displayUsage();
@@ -145,18 +147,18 @@ void handleInput (unsigned char key, int x, int y) {
       if (ctrl) {
           exit(0);
       } else {
-        cout << "Please enter a red value (0-127): ";
+        cout << "Change cursor color:\nPlease enter a red value (0-255): ";
         cin >> red_s;
-        cout << "Please enter a green value (0-127): ";
+        cout << "Please enter a green value (0-255): ";
         cin >> green_s;
-        cout << "Please enter a blue value (0-127): ";
+        cout << "Please enter a blue value (0-255): ";
         cin >> blue_s;
         red = stoi(red_s);
         green = stoi(green_s);
         blue = stoi(blue_s);
-        cursor->setColor({red, green, blue});
+        world->setCursorColor({red, green, blue});
       }
-        break;
+      break;
     case ' ':
       world->placeVoxels();
       break;
@@ -167,6 +169,19 @@ void handleInput (unsigned char key, int x, int y) {
     case 127:
       // delete
       world->eraseVoxels();
+      break;
+    case 'b':
+      cout << "Change background color:\nPlease enter a red value (0-255): ";
+      cin >> red_s;
+      cout << "Please enter a green value (0-255): ";
+      cin >> green_s;
+      cout << "Please enter a blue value (0-255): ";
+      cin >> blue_s;
+      redF = float(stoi(red_s)) / 255.0;
+      greenF = float(stoi(green_s)) / 255.0;
+      blueF = float(stoi(blue_s)) / 255.0;
+      world->setBackgroundColor({redF, greenF, blueF});
+      glClearColor(redF, greenF, blueF, 1.0f);
       break;
     case 'f':
       cout << "Please enter a filename for the exported .stl: ";
@@ -221,7 +236,7 @@ void handleSpecialInput (int key, int x, int y) {
       dz = 1;
       break;
   }
-  cursor->move({dx, dy, dz});
+  world->moveCursor({dx, dy, dz});
   glutPostRedisplay();
 }
 

@@ -40,7 +40,8 @@ Running `make && ./voxelpaint` starts Voxelpaint. Type `h` for the help page to 
     - `x`: zoom in
     - `r`: reset
 - **Other controls:**
-    - `c<red><green><blue>`: set color with rgb values
+    - `c<red><green><blue>`: set cursor color with rgb values
+    - `b<red><green><blue>`: set background color with rgb values
     - `k<path/to/file>`: export current world to .3dp
     - `l<path/to/file>`: load existing world from .3dp
     - `f<path/to/file>`: export current world to .stl

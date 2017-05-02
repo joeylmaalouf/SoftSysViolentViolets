@@ -10,7 +10,7 @@
 class Cursor {
   private:
     int shape = 1;
-    int radius = 1; // size of the cursor
+    int size = 1; // size of the cursor
     vector<int> color = {0, 96, 0}; // color of the cursor, <r,g,b>
     vector<int> position = {0, 0, 0}; // position of the cursor, <x,y,z>
 
@@ -20,7 +20,7 @@ class Cursor {
      * Size is represented by an integer.
      */
     int getSize ();
-    void setSize (int size);
+    void setSize (int newSize);
 
     /*
      * Getter and setter for cursor shape.

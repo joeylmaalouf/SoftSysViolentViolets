@@ -1,6 +1,6 @@
 #include "world.h"
 
-World::World (map<vector<int>, Voxel *> g, Cursor *c, vector<int> color) {
+World::World (map<vector<int>, Voxel *> g, Cursor *c, vector<float> color) {
   grid = g;
   cursor = c;
   backgroundColor = color;
@@ -29,23 +29,24 @@ void World::setCursorSize (int size) {
 void World::placeVoxels () {
   vector<vector<int>> coords = cursor->getCoords();
   map<vector<int>, Voxel *>::const_iterator it;
+  int total_added = coords.size();
   int num_added = 0;
-  Voxel **added = new Voxel*[num_added];
+  Voxel **added = new Voxel*[total_added];
   int num_removed = 0;
-  Voxel **removed = new Voxel*[num_added];  // num_added >= num_removed
+  Voxel **removed = new Voxel*[total_added];  // total_added >= num_removed
 
   for (vector<int> pos : coords) {
     Voxel *add = new Voxel(pos, cursor->getColor());
 
     // check if the new placement will remove a voxel
-    it = grid.find(add->getPosition());
+    it = grid.find(pos);
     if (it != grid.end()) {
       removed[num_removed] = it->second;
       num_removed++;
     }
 
     // place the new voxel
-    grid[add->getPosition()] = add;
+    grid[pos] = add;
     added[num_added] = add;
     num_added++;
   }
@@ -61,7 +62,7 @@ void World::eraseVoxels () {
   }
 }
 
-void World::setBackgroundColor (vector<int> color) {
+void World::setBackgroundColor (vector<float> color) {
   backgroundColor = color;
 }
 
