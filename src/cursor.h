@@ -19,7 +19,7 @@ class Cursor {
      * Size is represented by an integer.
      */
     int getSize ();
-    void setSize (int size);
+    void setSize (int newSize);
 
     /*
      * Getter and setter for cursor color.
