@@ -1,6 +1,6 @@
 ## Voxelpaint
 
-Voxelpaint is a three-dimensional version of Microsoft Paint built using C++ and OpenGL.
+Voxelpaint is a three-dimensional version of Microsoft Paint built using C++ and OpenGL. Authors: [@joeylmaalouf](http://github.com/joeylmaalouf), [@jovanduy](http://github.com/jovanduy), [@jsutker](http://github.com/jsutker), [@sarahwalters](http://github.com/sarahwalters)
 
 OpenGL is the most widely used and supported 2D and 3D graphics API. It abstracts away the lowest-level graphics primitives and provides wrapper functions which make it easier to model, render, and manipulate three-dimensional objects. We chose to use OpenGL because we preferred to focus on the project-specific details than a low-level implementation.
 
